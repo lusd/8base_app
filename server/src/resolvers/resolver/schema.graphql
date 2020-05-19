@@ -1,0 +1,5880 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+"FunctionInfo"
+interface FunctionInfo {
+  application: Application
+  description: String
+  functionType: FunctionType!
+  name: String!
+}
+
+"FunctionInfo"
+interface SystemFunctionInfo {
+  application: SystemApplication
+  description: String
+  functionType: SystemFunctionType!
+  name: String!
+}
+
+"Field Type Attributes"
+union FieldTypeAttributes = DateFieldTypeAttributes | FileFieldTypeAttributes | MissingRelationFieldTypeAttributes | NumberFieldTypeAttributes | SmartFieldTypeAttributes | SwitchFieldTypeAttributes | TextFieldTypeAttributes | UUIDFieldTypeAttributes
+
+"Field Type Attributes"
+union SystemFieldTypeAttributes = SystemDateFieldTypeAttributes | SystemFileFieldTypeAttributes | SystemMissingRelationFieldTypeAttributes | SystemNumberFieldTypeAttributes | SystemSmartFieldTypeAttributes | SystemSwitchFieldTypeAttributes | SystemTextFieldTypeAttributes | SystemUUIDFieldTypeAttributes
+
+"Table Attributes"
+union SystemTableAttributes = SystemViewAttributes
+
+"Table Attributes"
+union TableAttributes = ViewAttributes
+
+type ApiToken {
+  _description: String
+  createdAt: DateTime
+  createdBy: User
+  id: ID
+  name: String
+  roles(after: String, before: String, filter: RoleFilter, first: Int, groupBy: RoleGroupBy, last: Int, orderBy: [RoleOrderBy], skip: Int, sort: [RoleSort!]): RoleListResponse
+  updatedAt: DateTime
+}
+
+"ApiTokenListResponse output"
+type ApiTokenListResponse {
+  "List items count"
+  count: Int!
+  "Aggregated items"
+  groups: [GroupByResponse!]!
+  "List items"
+  items: [ApiToken!]!
+}
+
+"ApiTokenManyResponse output"
+type ApiTokenManyResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [ApiToken!]!
+}
+
+"ApiTokens subscription payload"
+type ApiTokenPayload {
+  mutation: MutationType!
+  node: ApiToken
+  previousValues: ApiToken
+  updatedFields: [String]
+}
+
+"API Token Response"
+type ApiTokenResponse {
+  createdAt: DateTime
+  createdBy: User
+  id: ID
+  name: String
+  roles(after: String, before: String, filter: RoleFilter, first: Int, groupBy: RoleGroupBy, last: Int, orderBy: [RoleOrderBy], skip: Int, sort: [RoleSort!]): RoleListResponse
+  token: String!
+  updatedAt: DateTime
+}
+
+"Application"
+type Application {
+  appType: String!
+  createdAt: DateTime!
+  description: String
+  displayName: String
+  id: ID!
+  name: String!
+  status: ApplicationStatusEnum!
+}
+
+"ApplicationListResponse output"
+type ApplicationListResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [Application!]!
+}
+
+"Async Session"
+type AsyncSession {
+  sessionId: String!
+}
+
+type AsyncSessionStatusResponse {
+  message: String
+  status: String!
+}
+
+"Auth response"
+type Auth {
+  idToken: String
+  refreshToken: String
+}
+
+type AuthenticationProfile {
+  _description: String
+  audiences: [String]
+  clientId: String
+  createdAt: DateTime
+  createdBy: User
+  databaseName: String
+  domain: String
+  id: ID
+  managementDomain: String
+  name: String
+  roles(after: String, before: String, filter: RoleFilter, first: Int, groupBy: RoleGroupBy, last: Int, orderBy: [RoleOrderBy], skip: Int, sort: [RoleSort!]): RoleListResponse
+  secret: String
+  selfSignUpEmailDomains: [String]
+  selfSignUpEnabled: Boolean
+  type: String
+  updatedAt: DateTime
+}
+
+"Authentication profile connection options"
+type AuthenticationProfileConnectionOptions {
+  facebook: FacebookOptions
+  github: GithubOptions
+  google: GoogleOptions
+}
+
+"AuthenticationProfileListResponse output"
+type AuthenticationProfileListResponse {
+  "List items count"
+  count: Int!
+  "Aggregated items"
+  groups: [GroupByResponse!]!
+  "List items"
+  items: [AuthenticationProfile!]!
+}
+
+"AuthenticationProfileManyResponse output"
+type AuthenticationProfileManyResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [AuthenticationProfile!]!
+}
+
+"AuthenticationProfiles subscription payload"
+type AuthenticationProfilePayload {
+  mutation: MutationType!
+  node: AuthenticationProfile
+  previousValues: AuthenticationProfile
+  updatedFields: [String]
+}
+
+type AuthenticationSetting {
+  _description: String
+  allowedCallbacks: [String]
+  allowedLogouts: [String]
+  allowedWebOrigins: [String]
+  connections: AuthenticationProfileConnectionOptions
+  createdAt: DateTime
+  createdBy: User
+  updatedAt: DateTime
+}
+
+"AuthenticationSettings subscription payload"
+type AuthenticationSettingPayload {
+  mutation: MutationType!
+  node: AuthenticationSetting
+  previousValues: AuthenticationSetting
+  updatedFields: [String]
+}
+
+type BillingCurrentPlanResponse {
+  displayName: String
+  id: ID
+  name: String
+  nextPlan: BillingNextPlanResponse
+  price: Int
+  status: WorkspaceStatus
+  trialEnd: DateTime
+}
+
+type BillingDetailsResponse {
+  brand: String
+  expMonth: Int
+  expYear: Int
+  last4: String
+}
+
+type BillingInvoiceItem {
+  amountDue: Float
+  amountPaid: Float
+  amountRemaining: Float
+  description: String
+  endingBalance: Float
+  id: ID!
+  invoicePdf: String
+  number: String
+  paid: Boolean
+  periodEnd: DateTime
+  periodStart: DateTime
+  status: String
+  total: Float
+}
+
+"BillingInvoicesListResponse output"
+type BillingInvoicesListResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [BillingInvoiceItem!]!
+}
+
+type BillingLimitMetricItem {
+  displayName: String
+  name: String
+  showPriority: Int
+  unit: String
+}
+
+type BillingMetricUsageItem {
+  limitMetric: BillingLimitMetricItem
+  value: Float
+}
+
+type BillingMetricUsageQuotaItem {
+  limitMetric: BillingLimitMetricItem
+  value: Float
+}
+
+"BillingMetricUsageQuotasListResponse output"
+type BillingMetricUsageQuotasListResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [BillingMetricUsageQuotaItem!]!
+}
+
+"BillingMetricUsagesListResponse output"
+type BillingMetricUsagesListResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [BillingMetricUsageItem!]!
+}
+
+type BillingNextPlanResponse {
+  displayName: String
+  id: ID
+  name: String
+  price: Int
+}
+
+type BillingPlanBaseInfo {
+  description: String
+  displayName: String
+  id: ID
+  isCustom: Boolean
+  isLegacy: Boolean
+  name: String
+  price: Int
+}
+
+type Client {
+  _description: String
+  birthday: Date
+  createdAt: DateTime
+  createdBy: User
+  email: String
+  firstName: String
+  id: ID
+  lastName: String
+  orders(after: String, before: String, filter: OrderFilter, first: Int, groupBy: OrderGroupBy, last: Int, orderBy: [OrderOrderBy], skip: Int, sort: [OrderSort!]): OrderListResponse
+  phone: String
+  updatedAt: DateTime
+}
+
+"ClientListResponse output"
+type ClientListResponse {
+  "List items count"
+  count: Int!
+  "Aggregated items"
+  groups: [GroupByResponse!]!
+  "List items"
+  items: [Client!]!
+}
+
+"ClientManyResponse output"
+type ClientManyResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [Client!]!
+}
+
+"Clients subscription payload"
+type ClientPayload {
+  mutation: MutationType!
+  node: Client
+  previousValues: Client
+  updatedFields: [String]
+}
+
+"Custom Table Field Type"
+type CustomTableField {
+  computedMode: ComputedFieldMode
+  defaultValue: String
+  description: String
+  displayName: String
+  expression: String
+  fieldType: FieldType
+  fieldTypeAttributes: FieldTypeAttributes
+  isList: Boolean!
+  isRequired: Boolean!
+  isUnique: Boolean
+  name: String
+}
+
+"Date Field Attributes"
+type DateFieldTypeAttributes {
+  format: String!
+}
+
+"DeployDataResponse"
+type DeployDataResponse {
+  buildName: String!
+  uploadBuildUrl: String!
+  uploadMetaDataUrl: String!
+}
+
+"DeployStatusResult"
+type DeployStatusResult {
+  message: String
+  status: DeployStatusEnum!
+}
+
+type EnvironmentBackupItem {
+  name: String!
+  size: Float!
+}
+
+type EnvironmentItem {
+  id: ID!
+  name: String!
+}
+
+type EnvironmentVariable {
+  _description: String
+  createdAt: DateTime
+  createdBy: User
+  id: ID
+  name: String
+  updatedAt: DateTime
+  value: String
+}
+
+"EnvironmentVariableListResponse output"
+type EnvironmentVariableListResponse {
+  "List items count"
+  count: Int!
+  "Aggregated items"
+  groups: [GroupByResponse!]!
+  "List items"
+  items: [EnvironmentVariable!]!
+}
+
+"EnvironmentVariableManyResponse output"
+type EnvironmentVariableManyResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [EnvironmentVariable!]!
+}
+
+"EnvironmentVariables subscription payload"
+type EnvironmentVariablePayload {
+  mutation: MutationType!
+  node: EnvironmentVariable
+  previousValues: EnvironmentVariable
+  updatedFields: [String]
+}
+
+"Facebook connection params"
+type FacebookOptions {
+  app_id: String!
+  app_secret: String!
+  enabled: Boolean!
+}
+
+"Field Data Features"
+type FieldDataFeatures {
+  create: Boolean!
+  sort: Boolean!
+  update: Boolean!
+}
+
+"Field Schema Features"
+type FieldSchemaFeatures {
+  delete: Boolean!
+  update: Boolean!
+}
+
+type File {
+  _description: String
+  createdAt: DateTime
+  createdBy: User
+  downloadUrl: String
+  fields: JSON
+  fileId: String
+  filename: String
+  id: ID
+  meta: JSON
+  mods: JSON
+  previewUrl: String
+  products_picture(after: String, before: String, filter: ProductFilter, first: Int, groupBy: ProductGroupBy, last: Int, orderBy: [ProductOrderBy], skip: Int, sort: [ProductSort!]): ProductListResponse
+  provider: String
+  public: Boolean
+  settings_landingPageImage(after: String, before: String, filter: SettingFilter, first: Int, groupBy: SettingGroupBy, last: Int, orderBy: [SettingOrderBy], skip: Int, sort: [SettingSort!]): SettingListResponse
+  settings_menuBarLogo(after: String, before: String, filter: SettingFilter, first: Int, groupBy: SettingGroupBy, last: Int, orderBy: [SettingOrderBy], skip: Int, sort: [SettingSort!]): SettingListResponse
+  shareUrl: String
+  teamMembers_avatar(after: String, before: String, filter: TeamMemberFilter, first: Int, groupBy: TeamMemberGroupBy, last: Int, orderBy: [TeamMemberOrderBy], skip: Int, sort: [TeamMemberSort!]): TeamMemberListResponse
+  updatedAt: DateTime
+  uploadUrl: String
+  uploaded: Boolean
+  users_avatar(after: String, before: String, filter: UserFilter, first: Int, groupBy: UserGroupBy, last: Int, orderBy: [UserOrderBy], skip: Int, sort: [UserSort!]): UserListResponse
+}
+
+"File Field Attributes"
+type FileFieldTypeAttributes {
+  expiration: Int
+  format: String!
+  maxSize: Int
+  showTitle: Boolean @deprecated(reason : "Field is deprecated")
+  showUrl: Boolean @deprecated(reason : "Field is deprecated")
+  typeRestrictions: [String!]
+}
+
+"FileListResponse output"
+type FileListResponse {
+  "List items count"
+  count: Int!
+  "Aggregated items"
+  groups: [GroupByResponse!]!
+  "List items"
+  items: [File!]!
+}
+
+"FileManyResponse output"
+type FileManyResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [File!]!
+}
+
+"Files subscription payload"
+type FilePayload {
+  mutation: MutationType!
+  node: File
+  previousValues: File
+  updatedFields: [String]
+}
+
+type FileUploadInfoResponse {
+  apiKey: String!
+  path: String!
+  policy: String!
+  signature: String!
+}
+
+"FunctionListResponse output"
+type FunctionListResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [FunctionInfo!]!
+}
+
+"FunctionResolverInfo"
+type FunctionResolverInfo implements FunctionInfo {
+  application: Application
+  description: String
+  functionType: FunctionType!
+  gqlType: String!
+  name: String!
+}
+
+"FunctionTaskInfo"
+type FunctionTaskInfo implements FunctionInfo {
+  application: Application
+  description: String
+  functionType: FunctionType!
+  name: String!
+  scheduleExpression: String
+}
+
+"FunctionTriggerInfo"
+type FunctionTriggerInfo implements FunctionInfo {
+  application: Application
+  description: String
+  functionType: FunctionType!
+  name: String!
+  operation: String!
+  tableName: String!
+  type: String!
+}
+
+"FunctionWebhookInfo"
+type FunctionWebhookInfo implements FunctionInfo {
+  application: Application
+  description: String
+  functionType: FunctionType!
+  httpMethod: String!
+  name: String!
+  workspaceRelativePath: String!
+}
+
+"Github connection params"
+type GithubOptions {
+  client_id: String!
+  client_secret: String!
+  enabled: Boolean!
+}
+
+"Google connection params"
+type GoogleOptions {
+  client_id: String!
+  client_secret: String!
+  enabled: Boolean!
+}
+
+type GroupByResponse {
+  ApiTokenGroup(after: String, before: String, filter: ApiTokenFilter, first: Int, groupBy: ApiTokenGroupBy, last: Int, orderBy: [ApiTokenOrderBy], skip: Int, sort: [ApiTokenSort!]): ApiTokenListResponse!
+  AuthenticationProfileGroup(after: String, before: String, filter: AuthenticationProfileFilter, first: Int, groupBy: AuthenticationProfileGroupBy, last: Int, orderBy: [AuthenticationProfileOrderBy], skip: Int, sort: [AuthenticationProfileSort!]): AuthenticationProfileListResponse!
+  BigInt: BigInt
+  Boolean: Boolean
+  ClientGroup(after: String, before: String, filter: ClientFilter, first: Int, groupBy: ClientGroupBy, last: Int, orderBy: [ClientOrderBy], skip: Int, sort: [ClientSort!]): ClientListResponse!
+  Date: Date
+  DateTime: DateTime
+  EnvironmentVariableGroup(after: String, before: String, filter: EnvironmentVariableFilter, first: Int, groupBy: EnvironmentVariableGroupBy, last: Int, orderBy: [EnvironmentVariableOrderBy], skip: Int, sort: [EnvironmentVariableSort!]): EnvironmentVariableListResponse!
+  FileGroup(after: String, before: String, filter: FileFilter, first: Int, groupBy: FileGroupBy, last: Int, orderBy: [FileOrderBy], skip: Int, sort: [FileSort!]): FileListResponse!
+  Float: Float
+  GroupIds: [ID!]
+  ID: ID
+  Int: Int
+  JSON: JSON
+  OrderGroup(after: String, before: String, filter: OrderFilter, first: Int, groupBy: OrderGroupBy, last: Int, orderBy: [OrderOrderBy], skip: Int, sort: [OrderSort!]): OrderListResponse!
+  OrderItemGroup(after: String, before: String, filter: OrderItemFilter, first: Int, groupBy: OrderItemGroupBy, last: Int, orderBy: [OrderItemOrderBy], skip: Int, sort: [OrderItemSort!]): OrderItemListResponse!
+  ProductGroup(after: String, before: String, filter: ProductFilter, first: Int, groupBy: ProductGroupBy, last: Int, orderBy: [ProductOrderBy], skip: Int, sort: [ProductSort!]): ProductListResponse!
+  RoleGroup(after: String, before: String, filter: RoleFilter, first: Int, groupBy: RoleGroupBy, last: Int, orderBy: [RoleOrderBy], skip: Int, sort: [RoleSort!]): RoleListResponse!
+  String: String
+  TeamMemberGroup(after: String, before: String, filter: TeamMemberFilter, first: Int, groupBy: TeamMemberGroupBy, last: Int, orderBy: [TeamMemberOrderBy], skip: Int, sort: [TeamMemberSort!]): TeamMemberListResponse!
+  UserGroup(after: String, before: String, filter: UserFilter, first: Int, groupBy: UserGroupBy, last: Int, orderBy: [UserOrderBy], skip: Int, sort: [UserSort!]): UserListResponse!
+}
+
+"ImportedTable"
+type ImportedTable {
+  id: ID!
+  name: String!
+}
+
+type IntrospectionQueryResponse {
+  url: String!
+}
+
+"Invited By Name"
+type InvitedByName {
+  email: String
+  firstName: String
+  lastName: String
+  workspaceName: String
+}
+
+"InvokeFunctionResponse"
+type InvokeFunctionResponse {
+  responseData: String!
+}
+
+"LoginResponse"
+type LoginResponse {
+  auth: Auth
+  success: Boolean
+  workspaces: [WorkspaceInfo!]
+}
+
+"MissingRelation"
+type MissingRelation {
+  table: String!
+}
+
+"MissingRelation Field Attributes"
+type MissingRelationFieldTypeAttributes {
+  missingTable: String!
+}
+
+type Mutation {
+  apiTokenCreate(data: ApiTokenCreateInput!): ApiTokenResponse!
+  apiTokenDelete(data: ApiTokenDeleteInput, filter: ApiTokenKeyFilter, force: Boolean): SuccessResponse
+  apiTokenUpdate(data: ApiTokenUpdateInput!, filter: ApiTokenKeyFilter, force: Boolean): ApiToken!
+  apiTokenUpdateByFilter(data: ApiTokenUpdateByFilterInput!, filter: ApiTokenFilter): ApiTokenManyResponse!
+  applicationDelete(data: ApplicationDeleteMutationInput!): SuccessResponse @deprecated(reason : "No longer supported. Use `system.applicationDelete` instead.")
+  applicationInstall(data: ApplicationInstallInput!): Application @deprecated(reason : "No longer supported. Use `system.applicationInstall` instead.")
+  applicationUpdate(data: ApplicationUpdateInput!): Application @deprecated(reason : "No longer supported. Use `system.applicationUpdate` instead.")
+  authenticationProfileCreate(data: AuthenticationProfileCreateInput!): AuthenticationProfile!
+  authenticationProfileCreateMany(data: [AuthenticationProfileCreateManyInput]!): AuthenticationProfileManyResponse!
+  authenticationProfileDelete(data: AuthenticationProfileDeleteInput, filter: AuthenticationProfileKeyFilter, force: Boolean): SuccessResponse
+  authenticationProfileUpdate(data: AuthenticationProfileUpdateInput!, filter: AuthenticationProfileKeyFilter, force: Boolean): AuthenticationProfile!
+  authenticationProfileUpdateByFilter(data: AuthenticationProfileUpdateByFilterInput!, filter: AuthenticationProfileFilter): AuthenticationProfileManyResponse!
+  authenticationSettingsUpdate(data: AuthenticationSettingUpdateInput!): AuthenticationSetting!
+  billingDetailsUpdate(data: BillingDetailsUpdateMutationInput!): BillingDetailsResponse @deprecated(reason : "No longer supported. Use `system.billingDetailsUpdate` instead.")
+  billingPlanUpdate(data: BillingPlanUpdateMutationInput!): BillingCurrentPlanResponse @deprecated(reason : "No longer supported. Use `system.billingPlanUpdate` instead.")
+  clientCreate(data: ClientCreateInput!): Client!
+  clientCreateMany(data: [ClientCreateManyInput]!): ClientManyResponse!
+  clientDelete(data: ClientDeleteInput, filter: ClientKeyFilter, force: Boolean): SuccessResponse
+  clientUpdate(data: ClientUpdateInput!, filter: ClientKeyFilter, force: Boolean): Client!
+  clientUpdateByFilter(data: ClientUpdateByFilterInput!, filter: ClientFilter): ClientManyResponse!
+  deploy(data: DeployingBuildInput): Boolean @deprecated(reason : "No longer supported. Use `system.deploy` instead.")
+  environmentVariableCreate(data: EnvironmentVariableCreateInput!): EnvironmentVariable!
+  environmentVariableCreateMany(data: [EnvironmentVariableCreateManyInput]!): EnvironmentVariableManyResponse!
+  environmentVariableDelete(data: EnvironmentVariableDeleteInput, filter: EnvironmentVariableKeyFilter, force: Boolean): SuccessResponse
+  environmentVariableUpdate(data: EnvironmentVariableUpdateInput!, filter: EnvironmentVariableKeyFilter, force: Boolean): EnvironmentVariable!
+  environmentVariableUpdateByFilter(data: EnvironmentVariableUpdateByFilterInput!, filter: EnvironmentVariableFilter): EnvironmentVariableManyResponse!
+  fieldCreate(data: TableFieldCreateInput!): TableField! @deprecated(reason : "No longer supported. Use `system.fieldCreate` instead.")
+  fieldDelete(data: TableFieldDeleteInput!): SuccessResponse! @deprecated(reason : "No longer supported. Use `system.fieldDelete` instead.")
+  fieldUpdate(data: TableFieldUpdateInput!): TableField! @deprecated(reason : "No longer supported. Use `system.fieldUpdate` instead.")
+  fieldUpdatePosition(data: TableFieldPositionUpdateInput!): SuccessResponse! @deprecated(reason : "No longer supported. Use `system.fieldUpdatePosition` instead.")
+  fileCreate(data: FileCreateInput!): File!
+  fileCreateMany(data: [FileCreateManyInput]!): FileManyResponse!
+  fileDelete(data: FileDeleteInput, filter: FileKeyFilter, force: Boolean): SuccessResponse
+  fileUpdate(data: FileUpdateInput!, filter: FileKeyFilter, force: Boolean): File!
+  fileUpdateByFilter(data: FileUpdateByFilterInput!, filter: FileFilter): FileManyResponse!
+  indexCreate(data: IndexCreateInput!): TableIndex!
+  indexDelete(data: IndexDeleteInput!): SuccessResponse
+  indexUpdate(data: IndexUpdateInput!): TableIndex!
+  inviteMembers(data: InviteMembersInput!): [TeamInvitation]!
+  invoke(data: InvokeData): InvokeFunctionResponse @deprecated(reason : "No longer supported. Use `system.invoke` instead.")
+  orderCreate(data: OrderCreateInput!): Order!
+  orderCreateMany(data: [OrderCreateManyInput]!): OrderManyResponse!
+  orderDelete(data: OrderDeleteInput, filter: OrderKeyFilter, force: Boolean): SuccessResponse
+  orderItemCreate(data: OrderItemCreateInput!): OrderItem!
+  orderItemCreateMany(data: [OrderItemCreateManyInput]!): OrderItemManyResponse!
+  orderItemDelete(data: OrderItemDeleteInput, filter: OrderItemKeyFilter, force: Boolean): SuccessResponse
+  orderItemUpdate(data: OrderItemUpdateInput!, filter: OrderItemKeyFilter, force: Boolean): OrderItem!
+  orderItemUpdateByFilter(data: OrderItemUpdateByFilterInput!, filter: OrderItemFilter): OrderItemManyResponse!
+  orderUpdate(data: OrderUpdateInput!, filter: OrderKeyFilter, force: Boolean): Order!
+  orderUpdateByFilter(data: OrderUpdateByFilterInput!, filter: OrderFilter): OrderManyResponse!
+  prepareDeploy: DeployDataResponse! @deprecated(reason : "No longer supported. Use `system.prepareDeploy` instead.")
+  productCreate(data: ProductCreateInput!): Product!
+  productCreateMany(data: [ProductCreateManyInput]!): ProductManyResponse!
+  productDelete(data: ProductDeleteInput, filter: ProductKeyFilter, force: Boolean): SuccessResponse
+  productUpdate(data: ProductUpdateInput!, filter: ProductKeyFilter, force: Boolean): Product!
+  productUpdateByFilter(data: ProductUpdateByFilterInput!, filter: ProductFilter): ProductManyResponse!
+  roleCreate(data: RoleCreateInput!): Role!
+  roleCreateMany(data: [RoleCreateManyInput]!): RoleManyResponse!
+  roleDelete(data: RoleDeleteInput, filter: RoleKeyFilter, force: Boolean): SuccessResponse
+  roleUpdate(data: RoleUpdateInput!, filter: RoleKeyFilter, force: Boolean): Role!
+  roleUpdateByFilter(data: RoleUpdateByFilterInput!, filter: RoleFilter): RoleManyResponse!
+  settingsUpdate(data: SettingUpdateInput!): Setting!
+  system: SystemMutation
+  tableCreate(data: TableCreateInput!): Table! @deprecated(reason : "No longer supported. Use `system.tableCreate` instead.")
+  tableDelete(data: TableDeleteInput!): SuccessResponse! @deprecated(reason : "No longer supported. Use `system.tableDelete` instead.")
+  tableUpdate(data: TableUpdateInput!): Table! @deprecated(reason : "No longer supported. Use `system.tableUpdate` instead.")
+  teamInvitationAccept(data: TeamInvitationAcceptInput!): TeamInvitationAcceptResponse!
+  teamInvitationCancel(data: TeamInvitationCancelInput!): SuccessResponse
+  teamInvitationDelete(data: TeamInvitationDeleteInput, filter: TeamInvitationKeyFilter, force: Boolean): SuccessResponse
+  teamInvitationResend(data: TeamInvitationResendInput!): SuccessResponse
+  teamMemberDelete(data: TeamMemberDeleteInput, filter: TeamMemberKeyFilter, force: Boolean): SuccessResponse
+  teamMemberUpdate(data: TeamMemberUpdateInput!, filter: TeamMemberKeyFilter, force: Boolean): TeamMember!
+  teamMemberUpdateByFilter(data: TeamMemberUpdateByFilterInput!, filter: TeamMemberFilter): TeamMemberManyResponse!
+  userCreate(data: UserCreateInput!): User!
+  userCreateMany(data: [UserCreateManyInput]!): UserManyResponse!
+  userDelete(data: UserDeleteInput, filter: UserKeyFilter, force: Boolean): SuccessResponse
+  userLogin(data: UserLoginInput!): LoginResponse
+  userRefreshToken(data: RefreshTokenInput!): Auth
+  userSignUp(authProfileId: ID, user: UserCreateInput!): User! @deprecated(reason : "No longer supported. Use `userSignUpWithToken` instead.")
+  userSignUpResend(data: SignUpResendInput!): SuccessResponse @deprecated(reason : "No longer supported. Use `userVerificationEmailResend` instead.")
+  userSignUpWithPassword(authProfileId: ID, password: String!, user: UserCreateInput!): User!
+  userSignUpWithToken(authProfileId: ID, user: UserCreateInput!): User!
+  userUpdate(data: UserUpdateInput!, filter: UserKeyFilter, force: Boolean): User!
+  userUpdateByFilter(data: UserUpdateByFilterInput!, filter: UserFilter): UserManyResponse!
+  userVerificationEmailResend(authProfileId: ID, data: VerificationEmailResendInput!): SuccessResponse
+  viewCreate(data: ViewCreateInput!): Table! @deprecated(reason : "No longer supported. Use `system.viewCreate` instead.")
+  viewUpdate(data: ViewUpdateInput!): Table!
+  workspaceCreate(data: WorkspaceCreateMutationInput!): WorkspaceCreateResponse @deprecated(reason : "No longer supported. Use `system.workspaceCreate` instead.")
+  workspaceCreateAsync(data: WorkspaceCreateMutationInput!): WorkspaceCreateResponse @deprecated(reason : "No longer supported. Use `system.workspaceCreateAsync` instead.")
+  workspaceDelete(data: WorkspaceDeleteMutationInput!): SuccessResponse @deprecated(reason : "No longer supported. Use `system.workspaceDelete` instead.")
+  workspaceLeave(force: Boolean): SuccessResponse @deprecated(reason : "No longer supported. Use `system.workspaceLeave` instead.")
+  workspaceUpdate(data: WorkspaceUpdateMutationInput!): WorkspaceUpdateResponse @deprecated(reason : "No longer supported. Use `system.workspaceUpdate` instead.")
+}
+
+"Number Field Attributes"
+type NumberFieldTypeAttributes {
+  autoIncrement: Boolean
+  currency: String
+  format: String!
+  isBigInt: Boolean
+  maxValue: Float
+  minValue: Float
+  precision: Int
+}
+
+type Order {
+  _description: String
+  address: String
+  client: Client
+  comment: String
+  createdAt: DateTime
+  createdBy: User
+  deliveryDt: DateTime
+  id: ID
+  orderItems(after: String, before: String, filter: OrderItemFilter, first: Int, groupBy: OrderItemGroupBy, last: Int, orderBy: [OrderItemOrderBy], skip: Int, sort: [OrderItemSort!]): OrderItemListResponse
+  status: String
+  updatedAt: DateTime
+}
+
+type OrderItem {
+  _description: String
+  createdAt: DateTime
+  createdBy: User
+  id: ID
+  order: Order
+  product: Product
+  quantity: Int
+  updatedAt: DateTime
+}
+
+"OrderItemListResponse output"
+type OrderItemListResponse {
+  "List items count"
+  count: Int!
+  "Aggregated items"
+  groups: [GroupByResponse!]!
+  "List items"
+  items: [OrderItem!]!
+}
+
+"OrderItemManyResponse output"
+type OrderItemManyResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [OrderItem!]!
+}
+
+"OrderItems subscription payload"
+type OrderItemPayload {
+  mutation: MutationType!
+  node: OrderItem
+  previousValues: OrderItem
+  updatedFields: [String]
+}
+
+"OrderListResponse output"
+type OrderListResponse {
+  "List items count"
+  count: Int!
+  "Aggregated items"
+  groups: [GroupByResponse!]!
+  "List items"
+  items: [Order!]!
+}
+
+"OrderManyResponse output"
+type OrderManyResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [Order!]!
+}
+
+"Orders subscription payload"
+type OrderPayload {
+  mutation: MutationType!
+  node: Order
+  previousValues: Order
+  updatedFields: [String]
+}
+
+type Permission {
+  _description: String
+  appId: String
+  createdAt: DateTime
+  createdBy: User
+  permission: JSON
+  resource: String
+  resourceType: String
+  role: Role
+  updatedAt: DateTime
+}
+
+"PermissionListResponse output"
+type PermissionListResponse {
+  "List items count"
+  count: Int!
+  "Aggregated items"
+  groups: [GroupByResponse!]!
+  "List items"
+  items: [Permission!]!
+}
+
+"Permissions subscription payload"
+type PermissionPayload {
+  mutation: MutationType!
+  node: Permission
+  previousValues: Permission
+  updatedFields: [String]
+}
+
+type Product {
+  _description: String
+  createdAt: DateTime
+  createdBy: User
+  description: String
+  id: ID
+  name: String
+  orderItems(after: String, before: String, filter: OrderItemFilter, first: Int, groupBy: OrderItemGroupBy, last: Int, orderBy: [OrderItemOrderBy], skip: Int, sort: [OrderItemSort!]): OrderItemListResponse
+  picture: File
+  price: Float
+  updatedAt: DateTime
+}
+
+"ProductListResponse output"
+type ProductListResponse {
+  "List items count"
+  count: Int!
+  "Aggregated items"
+  groups: [GroupByResponse!]!
+  "List items"
+  items: [Product!]!
+}
+
+"ProductManyResponse output"
+type ProductManyResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [Product!]!
+}
+
+"Products subscription payload"
+type ProductPayload {
+  mutation: MutationType!
+  node: Product
+  previousValues: Product
+  updatedFields: [String]
+}
+
+type Query {
+  apiToken(id: ID, name: String): ApiToken
+  apiTokensList(after: String, before: String, filter: ApiTokenFilter, first: Int, groupBy: ApiTokenGroupBy, last: Int, orderBy: [ApiTokenOrderBy], skip: Int, sort: [ApiTokenSort!]): ApiTokenListResponse!
+  application(id: String!): Application @deprecated(reason : "No longer supported. Use `system.application` instead.")
+  applicationsList: ApplicationListResponse @deprecated(reason : "No longer supported. Use `system.applicationsList` instead.")
+  asyncSessionStatus(sessionId: String!): AsyncSessionStatusResponse
+  authenticationProfile(id: ID, name: String): AuthenticationProfile
+  authenticationProfilesList(after: String, before: String, filter: AuthenticationProfileFilter, first: Int, groupBy: AuthenticationProfileGroupBy, last: Int, orderBy: [AuthenticationProfileOrderBy], skip: Int, sort: [AuthenticationProfileSort!]): AuthenticationProfileListResponse!
+  authenticationSettings: AuthenticationSetting
+  billingCurrentPlan: BillingCurrentPlanResponse @deprecated(reason : "No longer supported. Use `system.billingCurrentPlan` instead.")
+  billingDetails: BillingDetailsResponse @deprecated(reason : "No longer supported. Use `system.billingDetails` instead.")
+  billingInvoicesList(after: ID, before: ID, by: BillingInvoicesListFilterType, limit: Int): BillingInvoicesListResponse! @deprecated(reason : "No longer supported. Use `system.billingInvoicesList` instead.")
+  billingMetricUsageQuotasList: BillingMetricUsageQuotasListResponse! @deprecated(reason : "No longer supported. Use `system.billingMetricUsageQuotasList` instead.")
+  billingMetricUsagesList(filter: BillingMetricUsagesListFilter): BillingMetricUsagesListResponse! @deprecated(reason : "No longer supported. Use `system.billingMetricUsagesList` instead.")
+  client(id: ID): Client
+  clientsList(after: String, before: String, filter: ClientFilter, first: Int, groupBy: ClientGroupBy, last: Int, orderBy: [ClientOrderBy], skip: Int, sort: [ClientSort!]): ClientListResponse!
+  companyName: String
+  deployStatus(buildName: String!): DeployStatusResult! @deprecated(reason : "No longer supported. Use `system.deployStatus` instead.")
+  environmentVariable(id: ID, name: String): EnvironmentVariable
+  environmentVariablesList(after: String, before: String, filter: EnvironmentVariableFilter, first: Int, groupBy: EnvironmentVariableGroupBy, last: Int, orderBy: [EnvironmentVariableOrderBy], skip: Int, sort: [EnvironmentVariableSort!]): EnvironmentVariableListResponse!
+  file(fileId: String, id: ID): File
+  fileUploadInfo: FileUploadInfoResponse
+  filesList(after: String, before: String, filter: FileFilter, first: Int, groupBy: FileGroupBy, last: Int, orderBy: [FileOrderBy], skip: Int, sort: [FileSort!]): FileListResponse!
+  functionsList(applicationId: String, filter: FunctionInfoFilter, orderBy: [FunctionInfoOrderBy]): FunctionListResponse @deprecated(reason : "No longer supported. Use `system.functionsList` instead.")
+  logs(applicationId: String, endTime: DateTime, functionName: String!, limit: Int, startTime: DateTime): [String] @deprecated(reason : "No longer supported. Use `system.logs` instead.")
+  order(id: ID): Order
+  orderItem(id: ID): OrderItem
+  orderItemsList(after: String, before: String, filter: OrderItemFilter, first: Int, groupBy: OrderItemGroupBy, last: Int, orderBy: [OrderItemOrderBy], skip: Int, sort: [OrderItemSort!]): OrderItemListResponse!
+  ordersList(after: String, before: String, filter: OrderFilter, first: Int, groupBy: OrderGroupBy, last: Int, orderBy: [OrderOrderBy], skip: Int, sort: [OrderSort!]): OrderListResponse!
+  product(id: ID): Product
+  productsList(after: String, before: String, filter: ProductFilter, first: Int, groupBy: ProductGroupBy, last: Int, orderBy: [ProductOrderBy], skip: Int, sort: [ProductSort!]): ProductListResponse!
+  role(id: ID, name: String): Role
+  rolesList(after: String, before: String, filter: RoleFilter, first: Int, groupBy: RoleGroupBy, last: Int, orderBy: [RoleOrderBy], skip: Int, sort: [RoleSort!]): RoleListResponse!
+  settings: Setting
+  system: SystemQuery
+  table(id: ID, name: String): Table @deprecated(reason : "No longer supported. Use `system.table` instead.")
+  tableField(id: ID!): TableField @deprecated(reason : "No longer supported. Use `system.tableField` instead.")
+  tablesList(filter: TableListFilter): TableListResponse! @deprecated(reason : "No longer supported. Use `system.tablesList` instead.")
+  teamInvitationDetails(uuid: String!): TeamInvitationDetails
+  teamInvitationsDetailsList: TeamInvitationsDetailsList
+  teamMember(id: ID, userId: ID): TeamMember
+  teamMembersList(after: String, before: String, filter: TeamMemberFilter, first: Int, groupBy: TeamMemberGroupBy, last: Int, orderBy: [TeamMemberOrderBy], skip: Int, sort: [TeamMemberSort!]): TeamMemberListResponse!
+  user(email: String, id: ID): User
+  userBillingConfiguration: UserBillingConfigurationResponse!
+  userInvitationsList: UserInvitationList
+  usersList(after: String, before: String, filter: UserFilter, first: Int, groupBy: UserGroupBy, last: Int, orderBy: [UserOrderBy], skip: Int, sort: [UserSort!]): UserListResponse!
+  workspacesList: WorkspaceListResponse @deprecated(reason : "No longer supported. Use `system.workspacesList` instead.")
+}
+
+"Relation"
+type Relation {
+  refField: TableField
+  refFieldDisplayName: String
+  refFieldIsList: Boolean
+  refFieldIsRequired: Boolean
+  refFieldName: String
+  refTable: Table!
+  relationFieldName: String
+  relationTableName: String
+}
+
+type Role {
+  _description: String
+  apiTokens(after: String, before: String, filter: ApiTokenFilter, first: Int, groupBy: ApiTokenGroupBy, last: Int, orderBy: [ApiTokenOrderBy], skip: Int, sort: [ApiTokenSort!]): ApiTokenListResponse
+  authenticationProfiles(after: String, before: String, filter: AuthenticationProfileFilter, first: Int, groupBy: AuthenticationProfileGroupBy, last: Int, orderBy: [AuthenticationProfileOrderBy], skip: Int, sort: [AuthenticationProfileSort!]): AuthenticationProfileListResponse
+  createdAt: DateTime
+  createdBy: User
+  description: String
+  id: ID
+  name: String
+  permissions(filter: PermissionInputFilter): PermissionListResponse
+  teamMembers(after: String, before: String, filter: TeamMemberFilter, first: Int, groupBy: TeamMemberGroupBy, last: Int, orderBy: [TeamMemberOrderBy], skip: Int, sort: [TeamMemberSort!]): TeamMemberListResponse
+  updatedAt: DateTime
+  users(after: String, before: String, filter: UserFilter, first: Int, groupBy: UserGroupBy, last: Int, orderBy: [UserOrderBy], skip: Int, sort: [UserSort!]): UserListResponse
+}
+
+"RoleListResponse output"
+type RoleListResponse {
+  "List items count"
+  count: Int!
+  "Aggregated items"
+  groups: [GroupByResponse!]!
+  "List items"
+  items: [Role!]!
+}
+
+"RoleManyResponse output"
+type RoleManyResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [Role!]!
+}
+
+"Roles subscription payload"
+type RolePayload {
+  mutation: MutationType!
+  node: Role
+  previousValues: Role
+  updatedFields: [String]
+}
+
+"Schema Origin"
+type SchemaOrigin {
+  provider: String
+  type: SchemaOriginType!
+}
+
+type Setting {
+  _description: String
+  bgColor: String
+  buttonLinkColor: String
+  containerColor: String
+  createdAt: DateTime
+  createdBy: User
+  currency: String
+  dateFormat: String
+  landingPageImage: File
+  language: String
+  leftNavColor: String
+  menuBarBGColor: String
+  menuBarIconsColor: String
+  menuBarLogo: File
+  passwordMinLength: Int
+  passwordRequireLowercase: Boolean
+  passwordRequireNumbers: Boolean
+  passwordRequireSpecial: Boolean
+  passwordRequireUppercase: Boolean
+  passwordUpdateInterval: Int
+  rememberDevice: String
+  timezone: String
+  updatedAt: DateTime
+  userInterfaceStyle: String
+  vanityUrl: String
+}
+
+"SettingListResponse output"
+type SettingListResponse {
+  "List items count"
+  count: Int!
+  "Aggregated items"
+  groups: [GroupByResponse!]!
+  "List items"
+  items: [Setting!]!
+}
+
+"Settings subscription payload"
+type SettingPayload {
+  mutation: MutationType!
+  node: Setting
+  previousValues: Setting
+  updatedFields: [String]
+}
+
+"Smart Field Attributes"
+type SmartFieldTypeAttributes {
+  format: String!
+  innerFields: [CustomTableField]
+}
+
+type Subscription {
+  ApiTokens(filter: ApiTokenSubscriptionFilter): ApiTokenPayload
+  AuthenticationProfiles(filter: AuthenticationProfileSubscriptionFilter): AuthenticationProfilePayload
+  AuthenticationSettings(filter: AuthenticationSettingSubscriptionFilter): AuthenticationSettingPayload
+  Clients(filter: ClientSubscriptionFilter): ClientPayload
+  EnvironmentVariables(filter: EnvironmentVariableSubscriptionFilter): EnvironmentVariablePayload
+  Files(filter: FileSubscriptionFilter): FilePayload
+  OrderItems(filter: OrderItemSubscriptionFilter): OrderItemPayload
+  Orders(filter: OrderSubscriptionFilter): OrderPayload
+  Permissions(filter: PermissionSubscriptionFilter): PermissionPayload
+  Products(filter: ProductSubscriptionFilter): ProductPayload
+  Roles(filter: RoleSubscriptionFilter): RolePayload
+  Settings(filter: SettingSubscriptionFilter): SettingPayload
+  TeamInvitations(filter: TeamInvitationSubscriptionFilter): TeamInvitationPayload
+  TeamMembers(filter: TeamMemberSubscriptionFilter): TeamMemberPayload
+  Users(filter: UserSubscriptionFilter): UserPayload
+}
+
+type SuccessResponse {
+  success: Boolean
+}
+
+"Switch Field Attributes"
+type SwitchFieldTypeAttributes {
+  format: String!
+  listOptions: [String]
+}
+
+"Application"
+type SystemApplication {
+  appType: String!
+  createdAt: DateTime!
+  description: String
+  displayName: String
+  id: ID!
+  name: String!
+  status: SystemApplicationStatusEnum!
+}
+
+"SystemApplicationListResponse output"
+type SystemApplicationListResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [SystemApplication!]!
+}
+
+type SystemBillingCurrentPlanResponse {
+  displayName: String
+  id: ID
+  name: String
+  nextPlan: SystemBillingNextPlanResponse
+  price: Int
+  status: SystemWorkspaceStatus
+  trialEnd: DateTime
+}
+
+type SystemBillingDetailsResponse {
+  brand: String
+  expMonth: Int
+  expYear: Int
+  last4: String
+}
+
+type SystemBillingInvoiceItem {
+  amountDue: Float
+  amountPaid: Float
+  amountRemaining: Float
+  description: String
+  endingBalance: Float
+  id: ID!
+  invoicePdf: String
+  number: String
+  paid: Boolean
+  periodEnd: DateTime
+  periodStart: DateTime
+  status: String
+  total: Float
+}
+
+"SystemBillingInvoicesListResponse output"
+type SystemBillingInvoicesListResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [SystemBillingInvoiceItem!]!
+}
+
+type SystemBillingLimitMetricItem {
+  displayName: String
+  name: String
+  showPriority: Int
+  unit: String
+}
+
+type SystemBillingMetricUsageItem {
+  limitMetric: SystemBillingLimitMetricItem
+  value: Float
+}
+
+type SystemBillingMetricUsageQuotaItem {
+  limitMetric: SystemBillingLimitMetricItem
+  value: Float
+}
+
+"SystemBillingMetricUsageQuotasListResponse output"
+type SystemBillingMetricUsageQuotasListResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [SystemBillingMetricUsageQuotaItem!]!
+}
+
+"SystemBillingMetricUsagesListResponse output"
+type SystemBillingMetricUsagesListResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [SystemBillingMetricUsageItem!]!
+}
+
+type SystemBillingNextPlanResponse {
+  displayName: String
+  id: ID
+  name: String
+  price: Int
+}
+
+type SystemBillingPlanBaseInfo {
+  description: String
+  displayName: String
+  id: ID
+  isCustom: Boolean
+  isLegacy: Boolean
+  name: String
+  price: Int
+}
+
+"Custom Table Field Type"
+type SystemCustomTableField {
+  computedMode: SystemComputedFieldMode
+  defaultValue: String
+  description: String
+  displayName: String
+  expression: String
+  fieldType: SystemFieldType
+  fieldTypeAttributes: SystemFieldTypeAttributes
+  isList: Boolean!
+  isRequired: Boolean!
+  isUnique: Boolean
+  name: String
+}
+
+"Date Field Attributes"
+type SystemDateFieldTypeAttributes {
+  format: String!
+}
+
+"DeployDataResponse"
+type SystemDeployDataResponse {
+  buildName: String!
+  uploadBuildUrl: String!
+  uploadMetaDataUrl: String!
+}
+
+"SystemDeployStatusResult"
+type SystemDeployStatusResult {
+  message: String
+  status: SystemDeployStatusEnum!
+}
+
+"SystemEnvironmentBackupListResponse output"
+type SystemEnvironmentBackupListResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [EnvironmentBackupItem!]!
+}
+
+"SystemEnvironmentsListResponse output"
+type SystemEnvironmentsListResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [EnvironmentItem!]!
+}
+
+"Field Data Features"
+type SystemFieldDataFeatures {
+  create: Boolean!
+  sort: Boolean!
+  update: Boolean!
+}
+
+"Field Schema Features"
+type SystemFieldSchemaFeatures {
+  delete: Boolean!
+  update: Boolean!
+}
+
+"File Field Attributes"
+type SystemFileFieldTypeAttributes {
+  expiration: Int
+  format: String!
+  maxSize: Int
+  showTitle: Boolean @deprecated(reason : "Field is deprecated")
+  showUrl: Boolean @deprecated(reason : "Field is deprecated")
+  typeRestrictions: [String!]
+}
+
+"SystemFunctionListResponse output"
+type SystemFunctionListResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [SystemFunctionInfo!]!
+}
+
+"FunctionResolverInfo"
+type SystemFunctionResolverInfo implements SystemFunctionInfo {
+  application: SystemApplication
+  description: String
+  functionType: SystemFunctionType!
+  gqlType: String!
+  name: String!
+}
+
+"FunctionTaskInfo"
+type SystemFunctionTaskInfo implements SystemFunctionInfo {
+  application: SystemApplication
+  description: String
+  functionType: SystemFunctionType!
+  name: String!
+  scheduleExpression: String
+}
+
+"FunctionTriggerInfo"
+type SystemFunctionTriggerInfo implements SystemFunctionInfo {
+  application: SystemApplication
+  description: String
+  functionType: SystemFunctionType!
+  name: String!
+  operation: String!
+  tableName: String!
+  type: String!
+}
+
+"FunctionWebhookInfo"
+type SystemFunctionWebhookInfo implements SystemFunctionInfo {
+  application: SystemApplication
+  description: String
+  functionType: SystemFunctionType!
+  httpMethod: String!
+  name: String!
+  workspaceRelativePath: String!
+}
+
+"InvokeFunctionResponse"
+type SystemInvokeFunctionResponse {
+  responseData: String!
+}
+
+"MissingRelation Field Attributes"
+type SystemMissingRelationFieldTypeAttributes {
+  missingTable: String!
+}
+
+type SystemMutation {
+  applicationDelete(data: SystemApplicationDeleteMutationInput!): SuccessResponse
+  applicationInstall(data: SystemApplicationInstallInput!): SystemApplication
+  applicationUpdate(data: SystemApplicationUpdateInput!): SystemApplication
+  billingDetailsUpdate(data: SystemBillingDetailsUpdateMutationInput!): SystemBillingDetailsResponse
+  billingPlanUpdate(data: SystemBillingPlanUpdateMutationInput!): SystemBillingCurrentPlanResponse
+  deploy(data: SystemDeployingBuildInput): Boolean
+  environmentBackup(environmentId: String!): AsyncSession
+  environmentClone(mode: SystemCloneEnvironmentMode, name: String!, sourceEnvironmentId: String!): AsyncSession
+  fieldCreate(data: SystemTableFieldCreateInput!): SystemTableField!
+  fieldDelete(data: SystemTableFieldDeleteInput!): SuccessResponse!
+  fieldUpdate(data: SystemTableFieldUpdateInput!): SystemTableField!
+  fieldUpdatePosition(data: SystemTableFieldPositionUpdateInput!): SuccessResponse!
+  indexCreate(data: SystemIndexCreateInput!): SystemTableIndex!
+  indexDelete(data: SystemIndexDeleteInput!): SuccessResponse
+  indexUpdate(data: SystemIndexUpdateInput!): SystemTableIndex!
+  invoke(data: SystemInvokeData): SystemInvokeFunctionResponse
+  prepareDeploy: SystemDeployDataResponse!
+  tableCreate(data: SystemTableCreateInput!): SystemTable!
+  tableDelete(data: SystemTableDeleteInput!): SuccessResponse!
+  tableUpdate(data: SystemTableUpdateInput!): SystemTable!
+  viewCreate(data: SystemViewCreateInput!): SystemTable!
+  viewUpdate(data: SystemViewUpdateInput!): SystemTable!
+  workspaceCreate(data: SystemWorkspaceCreateMutationInput!): SystemWorkspaceCreateResponse
+  workspaceCreateAsync(data: SystemWorkspaceCreateMutationInput!): SystemWorkspaceCreateResponse
+  workspaceDelete(data: SystemWorkspaceDeleteMutationInput!): SuccessResponse
+  workspaceLeave(force: Boolean): SuccessResponse
+  workspaceUpdate(data: SystemWorkspaceUpdateMutationInput!): SystemWorkspaceUpdateResponse
+}
+
+"Number Field Attributes"
+type SystemNumberFieldTypeAttributes {
+  autoIncrement: Boolean
+  currency: String
+  format: String!
+  isBigInt: Boolean
+  maxValue: Float
+  minValue: Float
+  precision: Int
+}
+
+type SystemQuery {
+  application(id: String!): SystemApplication
+  applicationsList: SystemApplicationListResponse
+  billingCurrentPlan: SystemBillingCurrentPlanResponse
+  billingDetails: SystemBillingDetailsResponse
+  billingInvoicesList(after: ID, before: ID, by: SystemBillingInvoicesListFilterType, limit: Int): SystemBillingInvoicesListResponse!
+  billingMetricUsageQuotasList: SystemBillingMetricUsageQuotasListResponse!
+  billingMetricUsagesList(filter: SystemBillingMetricUsagesListFilter): SystemBillingMetricUsagesListResponse!
+  deployStatus(buildName: String!): SystemDeployStatusResult!
+  environmentBackupsList(environmentId: String!): SystemEnvironmentBackupListResponse
+  environmentsList(workspaceId: String!): SystemEnvironmentsListResponse
+  functionsList(applicationId: String, filter: SystemFunctionInfoFilter, orderBy: [SystemFunctionInfoOrderBy]): SystemFunctionListResponse
+  introspection: IntrospectionQueryResponse
+  logs(applicationId: String, endTime: DateTime, functionName: String!, limit: Int, startTime: DateTime): [String]
+  table(id: ID, name: String): SystemTable
+  tableField(id: ID!): SystemTableField
+  tablesList(filter: SystemTableListFilter): SystemTableListResponse!
+  userBillingConfiguration: SystemUserBillingConfigurationResponse!
+  workspacesList: SystemWorkspaceListResponse
+}
+
+"Relation"
+type SystemRelation {
+  refField: SystemTableField
+  refFieldDisplayName: String
+  refFieldIsList: Boolean
+  refFieldIsRequired: Boolean
+  refFieldName: String
+  refTable: SystemTable!
+  relationFieldName: String
+  relationTableName: String
+}
+
+"Schema Origin"
+type SystemSchemaOrigin {
+  provider: String
+  type: SystemSchemaOriginType!
+}
+
+"Smart Field Attributes"
+type SystemSmartFieldTypeAttributes {
+  format: String!
+  innerFields: [SystemCustomTableField]
+}
+
+"Switch Field Attributes"
+type SystemSwitchFieldTypeAttributes {
+  format: String!
+  listOptions: [String]
+}
+
+"Table"
+type SystemTable {
+  application: SystemApplication
+  attributes: SystemTableAttributes
+  dataFeatures: SystemTableDataFeatures!
+  description: String
+  displayName: String
+  fields: [SystemTableField!]
+  id: ID!
+  indexes: [SystemTableIndex!]
+  isSystem: Boolean!
+  name: String!
+  origin: SystemSchemaOrigin!
+  schemaFeatures: SystemTableSchemaFeatures!
+}
+
+"Table Data Features"
+type SystemTableDataFeatures {
+  create: Boolean!
+  delete: Boolean!
+  update: Boolean!
+}
+
+"TableField"
+type SystemTableField {
+  computedMode: SystemComputedFieldMode
+  dataFeatures: SystemFieldDataFeatures!
+  defaultValue: String
+  description: String
+  displayName: String
+  expression: String
+  fieldType: SystemFieldType!
+  fieldTypeAttributes: SystemFieldTypeAttributes
+  id: ID!
+  isList: Boolean!
+  isMeta: Boolean!
+  isRequired: Boolean!
+  isSystem: Boolean!
+  isUnique: Boolean
+  name: String!
+  origin: SystemSchemaOrigin!
+  relation: SystemRelation
+  schemaFeatures: SystemFieldSchemaFeatures!
+  table: SystemTable!
+}
+
+"Table Index"
+type SystemTableIndex {
+  columns: [SystemTableIndexColumn!]
+  id: ID!
+  isSystem: Boolean!
+  name: String
+  table: SystemTable!
+  type: String!
+}
+
+"Table Index Column"
+type SystemTableIndexColumn {
+  name: String!
+}
+
+"Table List Response"
+type SystemTableListResponse {
+  count: Int
+  items: [SystemTable]
+}
+
+"Table Schema Create Features"
+type SystemTableSchemaCreateFeatures {
+  DATE: Boolean!
+  FILE: Boolean!
+  ID: Boolean!
+  JSON: Boolean!
+  MISSING_RELATION: Boolean!
+  NUMBER: Boolean!
+  ONE_WAY_RELATION: Boolean!
+  RELATION: Boolean!
+  SMART: Boolean!
+  SWITCH: Boolean!
+  TEXT: Boolean!
+  UUID: Boolean!
+}
+
+"Table Schema Features"
+type SystemTableSchemaFeatures {
+  computedFields: Boolean!
+  create: SystemTableSchemaCreateFeatures!
+  update: SystemTableSchemaMetaFieldFeatures
+}
+
+"Table Schema Meta Field Features"
+type SystemTableSchemaMetaFieldFeatures {
+  displayName: Boolean!
+  name: Boolean!
+}
+
+"Text Field Attributes"
+type SystemTextFieldTypeAttributes {
+  fieldSize: Int
+  format: String!
+}
+
+"UUID Field Attributes"
+type SystemUUIDFieldTypeAttributes {
+  fieldSize: Int
+}
+
+type SystemUserBillingConfigurationResponse {
+  availablePlans: [SystemBillingPlanBaseInfo!]!
+  isCancelSubscriptionAvailable: Boolean!
+}
+
+"View Attributes"
+type SystemViewAttributes {
+  query: String
+}
+
+type SystemWorkspaceCreateResponse {
+  id: ID
+  name: String
+}
+
+"SystemWorkspaceListResponse output"
+type SystemWorkspaceListResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [WorkspaceItem!]!
+}
+
+type SystemWorkspaceUpdateResponse {
+  id: ID
+  name: String
+}
+
+"Table"
+type Table {
+  application: Application
+  attributes: TableAttributes
+  dataFeatures: TableDataFeatures!
+  description: String
+  displayName: String
+  fields: [TableField!]
+  id: ID!
+  indexes: [TableIndex!]
+  isSystem: Boolean!
+  name: String!
+  origin: SchemaOrigin!
+  schemaFeatures: TableSchemaFeatures!
+}
+
+"Table Data Features"
+type TableDataFeatures {
+  create: Boolean!
+  delete: Boolean!
+  update: Boolean!
+}
+
+"TableField"
+type TableField {
+  computedMode: ComputedFieldMode
+  dataFeatures: FieldDataFeatures!
+  defaultValue: String
+  description: String
+  displayName: String
+  expression: String
+  fieldType: FieldType!
+  fieldTypeAttributes: FieldTypeAttributes
+  id: ID!
+  isList: Boolean!
+  isMeta: Boolean!
+  isRequired: Boolean!
+  isSystem: Boolean!
+  isUnique: Boolean
+  name: String!
+  origin: SchemaOrigin!
+  relation: Relation
+  schemaFeatures: FieldSchemaFeatures!
+  table: Table!
+}
+
+"Table Index"
+type TableIndex {
+  columns: [TableIndexColumn!]
+  id: ID!
+  isSystem: Boolean!
+  name: String
+  table: Table!
+  type: String!
+}
+
+"Table Index Column"
+type TableIndexColumn {
+  name: String!
+}
+
+"Table List Response"
+type TableListResponse {
+  count: Int
+  items: [Table]
+}
+
+"Table Schema Create Features"
+type TableSchemaCreateFeatures {
+  DATE: Boolean!
+  FILE: Boolean!
+  ID: Boolean!
+  JSON: Boolean!
+  MISSING_RELATION: Boolean!
+  NUMBER: Boolean!
+  ONE_WAY_RELATION: Boolean!
+  RELATION: Boolean!
+  SMART: Boolean!
+  SWITCH: Boolean!
+  TEXT: Boolean!
+  UUID: Boolean!
+}
+
+"Table Schema Features"
+type TableSchemaFeatures {
+  computedFields: Boolean!
+  create: TableSchemaCreateFeatures!
+  update: TableSchemaMetaFieldFeatures
+}
+
+"Table Schema Meta Field Features"
+type TableSchemaMetaFieldFeatures {
+  displayName: Boolean!
+  name: Boolean!
+}
+
+type TeamInvitation {
+  _description: String
+  accepted: Boolean
+  acceptedOn: DateTime
+  createdAt: DateTime
+  createdBy: User
+  email: String
+  firstName: String
+  id: ID
+  invitedBy: TeamMember
+  invitee: TeamMember
+  lastName: String
+  resentOn: DateTime
+  updatedAt: DateTime
+  uuid: String
+}
+
+"TeamInvitationAcceptResponse"
+type TeamInvitationAcceptResponse {
+  invitation: TeamInvitation!
+  success: Boolean!
+}
+
+"Team Invitation Details"
+type TeamInvitationDetails {
+  email: String
+  firstName: String
+  invitedBy: InvitedByName
+  isRegistered: Boolean
+  lastName: String
+  uuid: String
+}
+
+"TeamInvitationListResponse output"
+type TeamInvitationListResponse {
+  "List items count"
+  count: Int!
+  "Aggregated items"
+  groups: [GroupByResponse!]!
+  "List items"
+  items: [TeamInvitation!]!
+}
+
+"TeamInvitations subscription payload"
+type TeamInvitationPayload {
+  mutation: MutationType!
+  node: TeamInvitation
+  previousValues: TeamInvitation
+  updatedFields: [String]
+}
+
+"Team Invitations Details List"
+type TeamInvitationsDetailsList {
+  count: Int
+  items: [TeamInvitationDetails]
+}
+
+type TeamMember {
+  _description: String
+  avatar: File
+  createdAt: DateTime
+  createdBy: User
+  email: String
+  firstName: String
+  id: ID
+  isOwner: Boolean
+  lastName: String
+  learningMode: Boolean
+  permissions(filter: PermissionInputFilter): UserPermissionList
+  receivedTeamInvitations(after: String, before: String, filter: TeamInvitationFilter, first: Int, groupBy: TeamInvitationGroupBy, last: Int, orderBy: [TeamInvitationOrderBy], skip: Int, sort: [TeamInvitationSort!]): TeamInvitationListResponse
+  roles(after: String, before: String, filter: RoleFilter, first: Int, groupBy: RoleGroupBy, last: Int, orderBy: [RoleOrderBy], skip: Int, sort: [RoleSort!]): RoleListResponse
+  sentTeamInvitations(after: String, before: String, filter: TeamInvitationFilter, first: Int, groupBy: TeamInvitationGroupBy, last: Int, orderBy: [TeamInvitationOrderBy], skip: Int, sort: [TeamInvitationSort!]): TeamInvitationListResponse
+  status: String
+  timezone: String
+  updatedAt: DateTime
+  user: User
+}
+
+"TeamMemberListResponse output"
+type TeamMemberListResponse {
+  "List items count"
+  count: Int!
+  "Aggregated items"
+  groups: [GroupByResponse!]!
+  "List items"
+  items: [TeamMember!]!
+}
+
+"TeamMemberManyResponse output"
+type TeamMemberManyResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [TeamMember!]!
+}
+
+"TeamMembers subscription payload"
+type TeamMemberPayload {
+  mutation: MutationType!
+  node: TeamMember
+  previousValues: TeamMember
+  updatedFields: [String]
+}
+
+"Text Field Attributes"
+type TextFieldTypeAttributes {
+  fieldSize: Int
+  format: String!
+}
+
+"UUID Field Attributes"
+type UUIDFieldTypeAttributes {
+  fieldSize: Int
+}
+
+type User {
+  _description: String
+  avatar: File
+  createdAt: DateTime
+  createdBy: User
+  email: String
+  firstName: String
+  id: ID
+  is8base: Boolean
+  lastName: String
+  learningMode: Boolean
+  origin: String
+  permissions(filter: PermissionInputFilter): UserPermissionList
+  roles(after: String, before: String, filter: RoleFilter, first: Int, groupBy: RoleGroupBy, last: Int, orderBy: [RoleOrderBy], skip: Int, sort: [RoleSort!]): RoleListResponse
+  status: String
+  timezone: String
+  updatedAt: DateTime
+}
+
+type UserBillingConfigurationResponse {
+  availablePlans: [BillingPlanBaseInfo!]!
+  isCancelSubscriptionAvailable: Boolean!
+}
+
+"Invitation Details"
+type UserInvitationDetails {
+  email: String
+  firstName: String
+  invitedBy: InvitedByName
+  isRegistered: Boolean
+  lastName: String
+  uuid: String
+}
+
+"User Invitation List"
+type UserInvitationList {
+  count: Int
+  items: [UserInvitationDetails]
+}
+
+"UserListResponse output"
+type UserListResponse {
+  "List items count"
+  count: Int!
+  "Aggregated items"
+  groups: [GroupByResponse!]!
+  "List items"
+  items: [User!]!
+}
+
+"UserManyResponse output"
+type UserManyResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [User!]!
+}
+
+"Users subscription payload"
+type UserPayload {
+  mutation: MutationType!
+  node: User
+  previousValues: User
+  updatedFields: [String]
+}
+
+"User Permission"
+type UserPermission {
+  permission: JSON
+  resource: String
+  resourceType: String
+}
+
+"User Permission List"
+type UserPermissionList {
+  count: Int!
+  items: [UserPermission!]
+}
+
+"View Attributes"
+type ViewAttributes {
+  query: String
+}
+
+type WorkspaceCreateResponse {
+  id: ID
+  name: String
+}
+
+"LoginResponseWorkspace name and id"
+type WorkspaceInfo {
+  name: String
+  workspace: ID
+}
+
+type WorkspaceItem {
+  id: ID!
+  isOwner: Boolean!
+  name: String!
+  plan: BillingCurrentPlanResponse
+}
+
+"WorkspaceListResponse output"
+type WorkspaceListResponse {
+  "List items count"
+  count: Int!
+  "List items"
+  items: [WorkspaceItem!]!
+}
+
+type WorkspaceUpdateResponse {
+  id: ID
+  name: String
+}
+
+enum AggregationFunctionType {
+  ANY_VALUE
+  AVG
+  COUNT
+  GROUP_CONCAT
+  MAX
+  MIN
+  STDDEV_POP
+  STDDEV_SAMP
+  SUM
+  VAR_POP
+  VAR_SAMP
+}
+
+"No longer supported. Use `sort` instead."
+enum ApiTokenOrderBy {
+  createdAt_ASC
+  createdAt_DESC
+  deletedAt_ASC
+  deletedAt_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  token_ASC
+  token_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+"Application Status Enum"
+enum ApplicationStatusEnum {
+  ACTIVE
+  INACTIVE
+}
+
+"No longer supported. Use `sort` instead."
+enum AuthenticationProfileOrderBy {
+  clientId_ASC
+  clientId_DESC
+  createdAt_ASC
+  createdAt_DESC
+  databaseName_ASC
+  databaseName_DESC
+  deletedAt_ASC
+  deletedAt_DESC
+  domain_ASC
+  domain_DESC
+  id_ASC
+  id_DESC
+  managementDomain_ASC
+  managementDomain_DESC
+  name_ASC
+  name_DESC
+  secret_ASC
+  secret_DESC
+  selfSignUpEnabled_ASC
+  selfSignUpEnabled_DESC
+  type_ASC
+  type_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+enum BillingInvoicesListFilterType {
+  CUSTOMER
+  WORKSPACE
+}
+
+"No longer supported. Use `sort` instead."
+enum ClientOrderBy {
+  birthday_ASC
+  birthday_DESC
+  createdAt_ASC
+  createdAt_DESC
+  deletedAt_ASC
+  deletedAt_DESC
+  email_ASC
+  email_DESC
+  firstName_ASC
+  firstName_DESC
+  id_ASC
+  id_DESC
+  lastName_ASC
+  lastName_DESC
+  phone_ASC
+  phone_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+"Computed field mode"
+enum ComputedFieldMode {
+  STORED
+  VIRTUAL
+}
+
+enum DatePartFunctionType {
+  DATE
+  DAY_NAME
+  DAY_OF_MONTH
+  DAY_OF_WEEK
+  DAY_OF_YEAR
+  HOUR
+  LAST_DAY
+  MICROSECOND
+  MINUTE
+  MONTH
+  MONTH_NAME
+  QUARTER
+  SECOND
+  TIME
+  WEEK
+  WEEK_DAY
+  WEEK_OF_YEAR
+  YEAR
+  YEAR_WEEK
+}
+
+"Date Type Format Enum"
+enum DateTypeFormatEnum {
+  DATE
+  DATETIME
+}
+
+enum DeployModeEnum {
+  FULL
+  FUNCTIONS
+  ONLY_PLUGINS
+  ONLY_PROJECT
+}
+
+enum DeployStatusEnum {
+  compiling
+  complete_error
+  complete_success
+  deploying
+  initialize
+  preparing
+}
+
+"No longer supported. Use `sort` instead."
+enum EnvironmentVariableOrderBy {
+  createdAt_ASC
+  createdAt_DESC
+  deletedAt_ASC
+  deletedAt_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  value_ASC
+  value_DESC
+}
+
+"Field types"
+enum FieldType {
+  DATE
+  FILE
+  ID
+  JSON
+  MISSING_RELATION
+  NUMBER
+  ONE_WAY_RELATION
+  RELATION
+  SMART
+  SWITCH
+  TEXT
+  UUID
+}
+
+"No longer supported. Use `sort` instead."
+enum FileOrderBy {
+  createdAt_ASC
+  createdAt_DESC
+  deletedAt_ASC
+  deletedAt_DESC
+  downloadUrl_ASC
+  downloadUrl_DESC
+  fields_ASC
+  fields_DESC
+  fileId_ASC
+  fileId_DESC
+  filename_ASC
+  filename_DESC
+  id_ASC
+  id_DESC
+  meta_ASC
+  meta_DESC
+  mods_ASC
+  mods_DESC
+  provider_ASC
+  provider_DESC
+  public_ASC
+  public_DESC
+  shareUrl_ASC
+  shareUrl_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  uploadUrl_ASC
+  uploadUrl_DESC
+  uploaded_ASC
+  uploaded_DESC
+}
+
+"File Type Format Enum"
+enum FileTypeFormatEnum {
+  FILE
+  IMAGE
+}
+
+"FunctionInfoOrderBy"
+enum FunctionInfoOrderBy {
+  description_ASC
+  description_DESC
+  functionType_ASC
+  functionType_DESC
+  name_ASC
+  name_DESC
+}
+
+"FunctionType"
+enum FunctionType {
+  resolver
+  schedule
+  task
+  trigger
+  webhook
+}
+
+enum MutationType {
+  create
+  delete
+  update
+}
+
+"Number Type Format Enum"
+enum NumberTypeFormatEnum {
+  CURRENCY
+  FRACTION
+  NUMBER
+  PERCENTAGE
+  SCIENTIFIC
+}
+
+"No longer supported. Use `sort` instead."
+enum OrderItemOrderBy {
+  createdAt_ASC
+  createdAt_DESC
+  deletedAt_ASC
+  deletedAt_DESC
+  id_ASC
+  id_DESC
+  quantity_ASC
+  quantity_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+"No longer supported. Use `sort` instead."
+enum OrderOrderBy {
+  address_ASC
+  address_DESC
+  comment_ASC
+  comment_DESC
+  createdAt_ASC
+  createdAt_DESC
+  deletedAt_ASC
+  deletedAt_DESC
+  deliveryDt_ASC
+  deliveryDt_DESC
+  id_ASC
+  id_DESC
+  status_ASC
+  status_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+enum PermissionResourceTypeEnum {
+  custom
+  data
+}
+
+"No longer supported. Use `sort` instead."
+enum ProductOrderBy {
+  createdAt_ASC
+  createdAt_DESC
+  deletedAt_ASC
+  deletedAt_DESC
+  description_ASC
+  description_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  price_ASC
+  price_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+"No longer supported. Use `sort` instead."
+enum RoleOrderBy {
+  createdAt_ASC
+  createdAt_DESC
+  deletedAt_ASC
+  deletedAt_DESC
+  description_ASC
+  description_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  systemType_ASC
+  systemType_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+"Schema Origin Type Enum"
+enum SchemaOriginType {
+  LOCAL
+  REMOTE
+  VIEW
+}
+
+"No longer supported. Use `sort` instead."
+enum SettingOrderBy {
+  bgColor_ASC
+  bgColor_DESC
+  buttonLinkColor_ASC
+  buttonLinkColor_DESC
+  containerColor_ASC
+  containerColor_DESC
+  createdAt_ASC
+  createdAt_DESC
+  currency_ASC
+  currency_DESC
+  dateFormat_ASC
+  dateFormat_DESC
+  deletedAt_ASC
+  deletedAt_DESC
+  id_ASC
+  id_DESC
+  language_ASC
+  language_DESC
+  leftNavColor_ASC
+  leftNavColor_DESC
+  menuBarBGColor_ASC
+  menuBarBGColor_DESC
+  menuBarIconsColor_ASC
+  menuBarIconsColor_DESC
+  passwordMinLength_ASC
+  passwordMinLength_DESC
+  passwordRequireLowercase_ASC
+  passwordRequireLowercase_DESC
+  passwordRequireNumbers_ASC
+  passwordRequireNumbers_DESC
+  passwordRequireSpecial_ASC
+  passwordRequireSpecial_DESC
+  passwordRequireUppercase_ASC
+  passwordRequireUppercase_DESC
+  passwordUpdateInterval_ASC
+  passwordUpdateInterval_DESC
+  rememberDevice_ASC
+  rememberDevice_DESC
+  timezone_ASC
+  timezone_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  userInterfaceStyle_ASC
+  userInterfaceStyle_DESC
+  vanityUrl_ASC
+  vanityUrl_DESC
+}
+
+"Smart Type Format Enum"
+enum SmartTypeFormatEnum {
+  ADDRESS
+  PHONE
+}
+
+"SortOrder"
+enum SortOrder {
+  ASC
+  DESC
+}
+
+enum StringTrimMode {
+  BOTH
+  LEADING
+  TRAILING
+}
+
+"Switch Type Format Enum"
+enum SwitchTypeFormatEnum {
+  ACTIVE_INACTIVE
+  CUSTOM
+  HIGH_LOW
+  ON_OFF
+  TRUE_FALSE
+  YES_NO
+}
+
+"Application Status Enum"
+enum SystemApplicationStatusEnum {
+  ACTIVE
+  INACTIVE
+}
+
+enum SystemBillingInvoicesListFilterType {
+  CUSTOMER
+  WORKSPACE
+}
+
+enum SystemCloneEnvironmentMode {
+  FULL
+  SYSTEM
+}
+
+"Computed field mode"
+enum SystemComputedFieldMode {
+  STORED
+  VIRTUAL
+}
+
+"Date Type Format Enum"
+enum SystemDateTypeFormatEnum {
+  DATE
+  DATETIME
+}
+
+enum SystemDeployModeEnum {
+  FULL
+  FUNCTIONS
+  ONLY_PLUGINS
+  ONLY_PROJECT
+}
+
+enum SystemDeployStatusEnum {
+  compiling
+  complete_error
+  complete_success
+  deploying
+  initialize
+  preparing
+}
+
+"Field types"
+enum SystemFieldType {
+  DATE
+  FILE
+  ID
+  JSON
+  MISSING_RELATION
+  NUMBER
+  ONE_WAY_RELATION
+  RELATION
+  SMART
+  SWITCH
+  TEXT
+  UUID
+}
+
+"File Type Format Enum"
+enum SystemFileTypeFormatEnum {
+  FILE
+  IMAGE
+}
+
+"FunctionInfoOrderBy"
+enum SystemFunctionInfoOrderBy {
+  description_ASC
+  description_DESC
+  functionType_ASC
+  functionType_DESC
+  name_ASC
+  name_DESC
+}
+
+"FunctionType"
+enum SystemFunctionType {
+  resolver
+  schedule
+  task
+  trigger
+  webhook
+}
+
+"Number Type Format Enum"
+enum SystemNumberTypeFormatEnum {
+  CURRENCY
+  FRACTION
+  NUMBER
+  PERCENTAGE
+  SCIENTIFIC
+}
+
+"Schema Origin Type Enum"
+enum SystemSchemaOriginType {
+  LOCAL
+  REMOTE
+  VIEW
+}
+
+"Smart Type Format Enum"
+enum SystemSmartTypeFormatEnum {
+  ADDRESS
+  PHONE
+}
+
+"Switch Type Format Enum"
+enum SystemSwitchTypeFormatEnum {
+  ACTIVE_INACTIVE
+  CUSTOM
+  HIGH_LOW
+  ON_OFF
+  TRUE_FALSE
+  YES_NO
+}
+
+"Text Type Format Enum"
+enum SystemTextTypeFormatEnum {
+  EIN
+  EMAIL
+  NAME
+  UNFORMATTED
+}
+
+enum SystemWorkspaceStatus {
+  active
+  blocked
+  canceled
+  canceling
+  pending
+  suspended
+}
+
+enum TableIndexType {
+  INDEX
+  UNIQUE
+}
+
+"No longer supported. Use `sort` instead."
+enum TeamInvitationOrderBy {
+  acceptedOn_ASC
+  acceptedOn_DESC
+  accepted_ASC
+  accepted_DESC
+  createdAt_ASC
+  createdAt_DESC
+  deletedAt_ASC
+  deletedAt_DESC
+  email_ASC
+  email_DESC
+  firstName_ASC
+  firstName_DESC
+  id_ASC
+  id_DESC
+  lastName_ASC
+  lastName_DESC
+  resentOn_ASC
+  resentOn_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  uuid_ASC
+  uuid_DESC
+}
+
+"No longer supported. Use `sort` instead."
+enum TeamMemberOrderBy {
+  createdAt_ASC
+  createdAt_DESC
+  deletedAt_ASC
+  deletedAt_DESC
+  id_ASC
+  id_DESC
+  isOwner_ASC
+  isOwner_DESC
+  status_ASC
+  status_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+"Text Type Format Enum"
+enum TextTypeFormatEnum {
+  EIN
+  EMAIL
+  NAME
+  UNFORMATTED
+}
+
+"No longer supported. Use `sort` instead."
+enum UserOrderBy {
+  createdAt_ASC
+  createdAt_DESC
+  deletedAt_ASC
+  deletedAt_DESC
+  email_ASC
+  email_DESC
+  firstName_ASC
+  firstName_DESC
+  id_ASC
+  id_DESC
+  is8base_ASC
+  is8base_DESC
+  isOwner_ASC
+  isOwner_DESC
+  lastName_ASC
+  lastName_DESC
+  origin_ASC
+  origin_DESC
+  status_ASC
+  status_DESC
+  timezone_ASC
+  timezone_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+enum WorkspaceStatus {
+  active
+  blocked
+  canceled
+  canceling
+  pending
+  suspended
+}
+
+"ApiTokens create input"
+input ApiTokenCreateInput {
+  name: String!
+  roles: ApiTokensRolesRelationInput
+}
+
+"ApiTokens delete input"
+input ApiTokenDeleteInput {
+  force: Boolean
+  id: ID
+}
+
+input ApiTokenFilter {
+  AND: [ApiTokenFilter!]
+  OR: [ApiTokenFilter!]
+  _fullText: String
+  createdAt: DateTimePredicate
+  createdBy: UserFilter
+  id: IDPredicate
+  name: StringPredicate
+  roles: RoleRelationFilter
+  updatedAt: DateTimePredicate
+}
+
+input ApiTokenGroupBy {
+  first: Int
+  having: Having
+  last: Int
+  query: ApiTokenGroupByQuery!
+  skip: Int
+  sort: [GroupBySort!]
+}
+
+input ApiTokenGroupByQuery {
+  _group: [GroupIdentifiersGroupByField!]
+  createdAt: [GroupByField!]
+  createdBy: UserGroupByQuery
+  id: [GroupByField!]
+  name: [GroupByField!]
+  roles: RoleGroupByQuery
+  updatedAt: [GroupByField!]
+}
+
+input ApiTokenKeyFilter {
+  id: ID
+  name: String
+}
+
+input ApiTokenRelationFilter {
+  every: ApiTokenFilter
+  none: ApiTokenFilter
+  some: ApiTokenFilter
+}
+
+input ApiTokenSort {
+  createdAt: SortOrder
+  createdBy: UserSort
+  id: SortOrder
+  name: SortOrder
+  updatedAt: SortOrder
+}
+
+"ApiTokens subscription filter"
+input ApiTokenSubscriptionFilter {
+  mutation_in: [MutationType]
+  node: ApiTokenFilter
+  updatedFields: UpdatedFieldsFilter
+}
+
+"ApiTokens update input"
+input ApiTokenUpdateByFilterInput {
+  name: [UpdateByFilterStringInput]
+  token: [UpdateByFilterStringInput]
+}
+
+"ApiTokens update input"
+input ApiTokenUpdateInput {
+  id: ID
+  name: String
+  roles: ApiTokensRolesUpdateRelationInput
+}
+
+"ApiTokens relation input"
+input ApiTokensRolesRelationInput {
+  connect: [RoleKeyFilter!]
+  create: [ApiTokens_RoleCreateInput]
+}
+
+"ApiTokens relation input"
+input ApiTokensRolesUpdateRelationInput {
+  connect: [RoleKeyFilter!]
+  create: [ApiTokens_RoleCreateInput]
+  disconnect: [RoleKeyFilter!]
+  reconnect: [RoleKeyFilter!]
+  update: [ApiTokens_RoleUpdateInput]
+}
+
+"Roles create input from apiTokens"
+input ApiTokens_RoleCreateInput {
+  apiTokens: RolesApiTokensRelationInput
+  authenticationProfiles: RolesAuthenticationProfilesRelationInput
+  description: String
+  name: String!
+  permissions: PermissionsInput
+  teamMembers: RolesTeamMembersRelationInput
+  users: RolesUsersRelationInput
+}
+
+"Roles update input from apiTokens"
+input ApiTokens_RoleUpdateInput {
+  data: RoleUpdateInput!
+  filter: RoleKeyFilter
+}
+
+"ApplicationDeleteMutationInput"
+input ApplicationDeleteMutationInput {
+  force: Boolean
+  id: String!
+}
+
+"Application install input"
+input ApplicationInstallInput {
+  appType: String!
+  description: String
+  displayName: String
+  name: String!
+  status: ApplicationStatusEnum = INACTIVE
+}
+
+"Application update input"
+input ApplicationUpdateInput {
+  description: String
+  displayName: String
+  id: String!
+  name: String
+  status: ApplicationStatusEnum
+}
+
+"Authentication profile connection options input"
+input AuthenticationProfileConnectionsOptionsInput {
+  facebook: FacebookOptionsInput
+  github: GithubOptionsInput
+  google: GoogleOptionsInput
+}
+
+"AuthenticationProfiles create input"
+input AuthenticationProfileCreateInput {
+  audiences: [String]
+  clientId: String
+  databaseName: String
+  domain: String
+  managementDomain: String
+  name: String!
+  roles: AuthenticationProfilesRolesRelationInput
+  secret: String
+  selfSignUpEmailDomains: [String]
+  selfSignUpEnabled: Boolean = false
+  type: String = "8BASE"
+}
+
+"AuthenticationProfiles create many input"
+input AuthenticationProfileCreateManyInput {
+  audiences: [String]
+  clientId: String
+  databaseName: String
+  domain: String
+  managementDomain: String
+  name: String!
+  secret: String
+  selfSignUpEmailDomains: [String]
+  selfSignUpEnabled: Boolean = false
+  type: String = "8BASE"
+}
+
+"AuthenticationProfiles delete input"
+input AuthenticationProfileDeleteInput {
+  force: Boolean
+  id: ID
+}
+
+input AuthenticationProfileFilter {
+  AND: [AuthenticationProfileFilter!]
+  OR: [AuthenticationProfileFilter!]
+  _fullText: String
+  clientId: StringPredicate
+  createdAt: DateTimePredicate
+  createdBy: UserFilter
+  databaseName: StringPredicate
+  domain: StringPredicate
+  id: IDPredicate
+  managementDomain: StringPredicate
+  name: StringPredicate
+  roles: RoleRelationFilter
+  secret: StringPredicate
+  selfSignUpEnabled: BoolPredicate
+  type: StringPredicate
+  updatedAt: DateTimePredicate
+}
+
+input AuthenticationProfileGroupBy {
+  first: Int
+  having: Having
+  last: Int
+  query: AuthenticationProfileGroupByQuery!
+  skip: Int
+  sort: [GroupBySort!]
+}
+
+input AuthenticationProfileGroupByQuery {
+  _group: [GroupIdentifiersGroupByField!]
+  audiences: [GroupByField!]
+  clientId: [GroupByField!]
+  createdAt: [GroupByField!]
+  createdBy: UserGroupByQuery
+  databaseName: [GroupByField!]
+  domain: [GroupByField!]
+  id: [GroupByField!]
+  managementDomain: [GroupByField!]
+  name: [GroupByField!]
+  roles: RoleGroupByQuery
+  secret: [GroupByField!]
+  selfSignUpEmailDomains: [GroupByField!]
+  selfSignUpEnabled: [GroupByField!]
+  type: [GroupByField!]
+  updatedAt: [GroupByField!]
+}
+
+input AuthenticationProfileKeyFilter {
+  id: ID
+  name: String
+}
+
+input AuthenticationProfileRelationFilter {
+  every: AuthenticationProfileFilter
+  none: AuthenticationProfileFilter
+  some: AuthenticationProfileFilter
+}
+
+input AuthenticationProfileSort {
+  clientId: SortOrder
+  createdAt: SortOrder
+  createdBy: UserSort
+  databaseName: SortOrder
+  domain: SortOrder
+  id: SortOrder
+  managementDomain: SortOrder
+  name: SortOrder
+  secret: SortOrder
+  selfSignUpEnabled: SortOrder
+  type: SortOrder
+  updatedAt: SortOrder
+}
+
+"AuthenticationProfiles subscription filter"
+input AuthenticationProfileSubscriptionFilter {
+  mutation_in: [MutationType]
+  node: AuthenticationProfileFilter
+  updatedFields: UpdatedFieldsFilter
+}
+
+"AuthenticationProfiles update input"
+input AuthenticationProfileUpdateByFilterInput {
+  audiences: [UpdateByFilterListStringInput]
+  clientId: [UpdateByFilterStringInput]
+  databaseName: [UpdateByFilterStringInput]
+  domain: [UpdateByFilterStringInput]
+  managementDomain: [UpdateByFilterStringInput]
+  name: [UpdateByFilterStringInput]
+  secret: [UpdateByFilterStringInput]
+  selfSignUpEmailDomains: [UpdateByFilterListStringInput]
+  selfSignUpEnabled: [UpdateByFilterBooleanSwitchInput]
+  type: [UpdateByFilterStringInput]
+}
+
+"AuthenticationProfiles update input"
+input AuthenticationProfileUpdateInput {
+  audiences: [String]
+  clientId: String
+  databaseName: String
+  domain: String
+  id: ID
+  managementDomain: String
+  name: String
+  roles: AuthenticationProfilesRolesUpdateRelationInput
+  secret: String
+  selfSignUpEmailDomains: [String]
+  selfSignUpEnabled: Boolean
+  type: String
+}
+
+"AuthenticationProfiles relation input"
+input AuthenticationProfilesRolesRelationInput {
+  connect: [RoleKeyFilter!]
+  create: [AuthenticationProfiles_RoleCreateInput]
+}
+
+"AuthenticationProfiles relation input"
+input AuthenticationProfilesRolesUpdateRelationInput {
+  connect: [RoleKeyFilter!]
+  create: [AuthenticationProfiles_RoleCreateInput]
+  disconnect: [RoleKeyFilter!]
+  reconnect: [RoleKeyFilter!]
+  update: [AuthenticationProfiles_RoleUpdateInput]
+}
+
+"Roles create input from authenticationProfiles"
+input AuthenticationProfiles_RoleCreateInput {
+  apiTokens: RolesApiTokensRelationInput
+  authenticationProfiles: RolesAuthenticationProfilesRelationInput
+  description: String
+  name: String!
+  permissions: PermissionsInput
+  teamMembers: RolesTeamMembersRelationInput
+  users: RolesUsersRelationInput
+}
+
+"Roles update input from authenticationProfiles"
+input AuthenticationProfiles_RoleUpdateInput {
+  data: RoleUpdateInput!
+  filter: RoleKeyFilter
+}
+
+input AuthenticationSettingFilter {
+  AND: [AuthenticationSettingFilter!]
+  OR: [AuthenticationSettingFilter!]
+  _fullText: String
+  createdAt: DateTimePredicate
+  createdBy: UserFilter
+  updatedAt: DateTimePredicate
+}
+
+"AuthenticationSettings subscription filter"
+input AuthenticationSettingSubscriptionFilter {
+  mutation_in: [MutationType]
+  node: AuthenticationSettingFilter
+  updatedFields: UpdatedFieldsFilter
+}
+
+"AuthenticationSettings update input"
+input AuthenticationSettingUpdateInput {
+  allowedCallbacks: [String]
+  allowedLogouts: [String]
+  allowedWebOrigins: [String]
+  connections: AuthenticationProfileConnectionsOptionsInput
+}
+
+"TeamMembers update input from avatar"
+input Avatar_TeamMemberUpdateInput {
+  data: TeamMemberUpdateInput!
+  filter: TeamMemberKeyFilter
+}
+
+"Users create input from avatar"
+input Avatar_UserCreateInput {
+  avatar: UsersAvatarRelationInput
+  email: String!
+  firstName: String
+  lastName: String
+  roles: UsersRolesRelationInput
+  status: String = "inactive"
+  timezone: String
+}
+
+"Users update input from avatar"
+input Avatar_UserUpdateInput {
+  data: UserUpdateInput!
+  filter: UserKeyFilter
+}
+
+input BigIntPredicateHaving {
+  AND: [BigIntPredicateHaving!]
+  OR: [BigIntPredicateHaving!]
+  equals: BigInt
+  gt: BigInt
+  gte: BigInt
+  in: [BigInt!]
+  is_empty: Boolean
+  is_not_empty: Boolean
+  lt: BigInt
+  lte: BigInt
+  not_equals: BigInt
+  not_in: [BigInt!]
+}
+
+"BillingDetailsUpdateMutationInput"
+input BillingDetailsUpdateMutationInput {
+  cardToken: String!
+}
+
+input BillingMetricUsagesListFilter {
+  entryDate: DateTimePredicate!
+}
+
+"BillingPlanUpdateMutationInput"
+input BillingPlanUpdateMutationInput {
+  planId: ID!
+}
+
+input BoolPredicate {
+  equals: Boolean
+  is_empty: Boolean
+  is_not_empty: Boolean
+  not_equals: Boolean
+}
+
+input BoolPredicateHaving {
+  AND: [BoolPredicateHaving!]
+  OR: [BoolPredicateHaving!]
+  equals: Boolean
+  is_empty: Boolean
+  is_not_empty: Boolean
+  not_equals: Boolean
+}
+
+"Clients create input"
+input ClientCreateInput {
+  birthday: Date!
+  email: String!
+  firstName: String!
+  lastName: String!
+  orders: ClientsOrdersRelationInput
+  phone: String!
+}
+
+"Clients create many input"
+input ClientCreateManyInput {
+  birthday: Date!
+  email: String!
+  firstName: String!
+  lastName: String!
+  phone: String!
+}
+
+"Clients delete input"
+input ClientDeleteInput {
+  force: Boolean
+  id: ID
+}
+
+"ClientFieldsPermissions create input"
+input ClientFieldsPermissions {
+  birthday: Boolean
+  createdAt: Boolean
+  email: Boolean
+  firstName: Boolean
+  lastName: Boolean
+  phone: Boolean
+  updatedAt: Boolean
+}
+
+input ClientFilter {
+  AND: [ClientFilter!]
+  OR: [ClientFilter!]
+  _fullText: String
+  birthday: DatePredicate
+  createdAt: DateTimePredicate
+  createdBy: UserFilter
+  email: StringPredicate
+  firstName: StringPredicate
+  id: IDPredicate
+  lastName: StringPredicate
+  orders: OrderRelationFilter
+  phone: StringPredicate
+  updatedAt: DateTimePredicate
+}
+
+input ClientGroupBy {
+  first: Int
+  having: Having
+  last: Int
+  query: ClientGroupByQuery!
+  skip: Int
+  sort: [GroupBySort!]
+}
+
+input ClientGroupByQuery {
+  _group: [GroupIdentifiersGroupByField!]
+  birthday: [GroupByField!]
+  createdAt: [GroupByField!]
+  createdBy: UserGroupByQuery
+  email: [GroupByField!]
+  firstName: [GroupByField!]
+  id: [GroupByField!]
+  lastName: [GroupByField!]
+  orders: OrderGroupByQuery
+  phone: [GroupByField!]
+  updatedAt: [GroupByField!]
+}
+
+input ClientKeyFilter {
+  id: ID
+}
+
+input ClientSort {
+  birthday: SortOrder
+  createdAt: SortOrder
+  createdBy: UserSort
+  email: SortOrder
+  firstName: SortOrder
+  id: SortOrder
+  lastName: SortOrder
+  phone: SortOrder
+  updatedAt: SortOrder
+}
+
+"Clients subscription filter"
+input ClientSubscriptionFilter {
+  mutation_in: [MutationType]
+  node: ClientFilter
+  updatedFields: UpdatedFieldsFilter
+}
+
+"Clients update input"
+input ClientUpdateByFilterInput {
+  birthday: [UpdateByFilterDateInput]
+  email: [UpdateByFilterStringInput]
+  firstName: [UpdateByFilterStringInput]
+  lastName: [UpdateByFilterStringInput]
+  phone: [UpdateByFilterStringInput]
+}
+
+"Clients update input"
+input ClientUpdateInput {
+  birthday: Date
+  email: String
+  firstName: String
+  id: ID
+  lastName: String
+  orders: ClientsOrdersUpdateRelationInput
+  phone: String
+}
+
+"Orders create input from client"
+input Client_OrderCreateInput {
+  address: String!
+  client: OrdersClientRelationInput
+  comment: String
+  deliveryDt: DateTime!
+  orderItems: OrdersOrderItemsRelationInput
+  status: String = "Opened"
+}
+
+"Orders update input from client"
+input Client_OrderUpdateInput {
+  data: OrderUpdateInput!
+  filter: OrderKeyFilter
+}
+
+"Clients relation input"
+input ClientsOrdersRelationInput {
+  connect: [OrderKeyFilter!]
+  create: [Client_OrderCreateInput]
+}
+
+"Clients relation input"
+input ClientsOrdersUpdateRelationInput {
+  connect: [OrderKeyFilter!]
+  create: [Client_OrderCreateInput]
+  disconnect: [OrderKeyFilter!]
+  reconnect: [OrderKeyFilter!]
+  update: [Client_OrderUpdateInput]
+}
+
+input DatePredicate {
+  equals: Date
+  gt: Date
+  gte: Date
+  in: [Date!]
+  is_empty: Boolean
+  is_not_empty: Boolean
+  lt: Date
+  lte: Date
+  not_equals: Date
+  not_in: [Date!]
+}
+
+input DatePredicateHaving {
+  AND: [DatePredicateHaving!]
+  OR: [DatePredicateHaving!]
+  equals: Date
+  gt: Date
+  gte: Date
+  in: [Date!]
+  is_empty: Boolean
+  is_not_empty: Boolean
+  lt: Date
+  lte: Date
+  not_equals: Date
+  not_in: [Date!]
+}
+
+input DateTimePredicate {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  is_empty: Boolean
+  is_not_empty: Boolean
+  lt: DateTime
+  lte: DateTime
+  not_equals: DateTime
+  not_in: [DateTime!]
+}
+
+input DateTimePredicateHaving {
+  AND: [DateTimePredicateHaving!]
+  OR: [DateTimePredicateHaving!]
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  is_empty: Boolean
+  is_not_empty: Boolean
+  lt: DateTime
+  lte: DateTime
+  not_equals: DateTime
+  not_in: [DateTime!]
+}
+
+"DeployOptions"
+input DeployOptions {
+  extensionNames: [String]
+  mode: DeployModeEnum = ONLY_PROJECT
+  pluginNames: [String]
+}
+
+"DeployingBuildInput"
+input DeployingBuildInput {
+  buildName: String!
+  options: DeployOptions
+}
+
+"EnvironmentVariables create input"
+input EnvironmentVariableCreateInput {
+  name: String!
+  value: String!
+}
+
+"EnvironmentVariables create many input"
+input EnvironmentVariableCreateManyInput {
+  name: String!
+  value: String!
+}
+
+"EnvironmentVariables delete input"
+input EnvironmentVariableDeleteInput {
+  force: Boolean
+  id: ID
+}
+
+input EnvironmentVariableFilter {
+  AND: [EnvironmentVariableFilter!]
+  OR: [EnvironmentVariableFilter!]
+  _fullText: String
+  createdAt: DateTimePredicate
+  createdBy: UserFilter
+  id: IDPredicate
+  name: StringPredicate
+  updatedAt: DateTimePredicate
+  value: StringPredicate
+}
+
+input EnvironmentVariableGroupBy {
+  first: Int
+  having: Having
+  last: Int
+  query: EnvironmentVariableGroupByQuery!
+  skip: Int
+  sort: [GroupBySort!]
+}
+
+input EnvironmentVariableGroupByQuery {
+  _group: [GroupIdentifiersGroupByField!]
+  createdAt: [GroupByField!]
+  createdBy: UserGroupByQuery
+  id: [GroupByField!]
+  name: [GroupByField!]
+  updatedAt: [GroupByField!]
+  value: [GroupByField!]
+}
+
+input EnvironmentVariableKeyFilter {
+  id: ID
+  name: String
+}
+
+input EnvironmentVariableSort {
+  createdAt: SortOrder
+  createdBy: UserSort
+  id: SortOrder
+  name: SortOrder
+  updatedAt: SortOrder
+  value: SortOrder
+}
+
+"EnvironmentVariables subscription filter"
+input EnvironmentVariableSubscriptionFilter {
+  mutation_in: [MutationType]
+  node: EnvironmentVariableFilter
+  updatedFields: UpdatedFieldsFilter
+}
+
+"EnvironmentVariables update input"
+input EnvironmentVariableUpdateByFilterInput {
+  name: [UpdateByFilterStringInput]
+  value: [UpdateByFilterStringInput]
+}
+
+"EnvironmentVariables update input"
+input EnvironmentVariableUpdateInput {
+  id: ID
+  name: String
+  value: String
+}
+
+"Facebook connection params input"
+input FacebookOptionsInput {
+  app_id: String!
+  app_secret: String!
+  enabled: Boolean!
+}
+
+"Field Type Attributes Input"
+input FieldTypeAttributesInput {
+  autoIncrement: Boolean
+  currency: String
+  expiration: Int
+  fieldSize: Int
+  format: String
+  isBigInt: Boolean
+  listOptions: [String!]
+  maxSize: Int
+  maxValue: Float
+  minValue: Float
+  precision: Int
+  typeRestrictions: [String!]
+}
+
+"Files create input"
+input FileCreateInput {
+  fileId: String
+  filename: String
+  meta: JSON
+  mods: JSON
+  products_picture: FilesProducts_pictureRelationInput
+  public: Boolean = false
+  teamMembers_avatar: FilesTeamMembers_avatarRelationInput
+  users_avatar: FilesUsers_avatarRelationInput
+}
+
+"Files create many input"
+input FileCreateManyInput {
+  fileId: String
+  filename: String
+  meta: JSON
+  mods: JSON
+  public: Boolean = false
+}
+
+"Files delete input"
+input FileDeleteInput {
+  force: Boolean
+  id: ID
+}
+
+"FileFieldsPermissions create input"
+input FileFieldsPermissions {
+  createdAt: Boolean
+  downloadUrl: Boolean
+  fields: Boolean
+  fileId: Boolean
+  filename: Boolean
+  meta: Boolean
+  mods: Boolean
+  provider: Boolean
+  public: Boolean
+  shareUrl: Boolean
+  updatedAt: Boolean
+  uploadUrl: Boolean
+  uploaded: Boolean
+}
+
+input FileFilter {
+  AND: [FileFilter!]
+  OR: [FileFilter!]
+  _fullText: String
+  createdAt: DateTimePredicate
+  createdBy: UserFilter
+  downloadUrl: StringPredicate
+  fileId: StringPredicate
+  filename: StringPredicate
+  id: IDPredicate
+  products_picture: ProductRelationFilter
+  provider: StringPredicate
+  public: BoolPredicate
+  settings_landingPageImage: SettingRelationFilter
+  settings_menuBarLogo: SettingRelationFilter
+  shareUrl: StringPredicate
+  teamMembers_avatar: TeamMemberRelationFilter
+  updatedAt: DateTimePredicate
+  uploadUrl: StringPredicate
+  uploaded: BoolPredicate
+  users_avatar: UserRelationFilter
+}
+
+input FileGroupBy {
+  first: Int
+  having: Having
+  last: Int
+  query: FileGroupByQuery!
+  skip: Int
+  sort: [GroupBySort!]
+}
+
+input FileGroupByQuery {
+  _group: [GroupIdentifiersGroupByField!]
+  createdAt: [GroupByField!]
+  createdBy: UserGroupByQuery
+  downloadUrl: [GroupByField!]
+  fields: [GroupByField!]
+  fileId: [GroupByField!]
+  filename: [GroupByField!]
+  id: [GroupByField!]
+  meta: [GroupByField!]
+  mods: [GroupByField!]
+  products_picture: ProductGroupByQuery
+  provider: [GroupByField!]
+  public: [GroupByField!]
+  settings_landingPageImage: SettingGroupByQuery
+  settings_menuBarLogo: SettingGroupByQuery
+  shareUrl: [GroupByField!]
+  teamMembers_avatar: TeamMemberGroupByQuery
+  updatedAt: [GroupByField!]
+  uploadUrl: [GroupByField!]
+  uploaded: [GroupByField!]
+  users_avatar: UserGroupByQuery
+}
+
+input FileKeyFilter {
+  fileId: String
+  id: ID
+}
+
+input FileSort {
+  createdAt: SortOrder
+  createdBy: UserSort
+  downloadUrl: SortOrder
+  fileId: SortOrder
+  filename: SortOrder
+  id: SortOrder
+  provider: SortOrder
+  public: SortOrder
+  shareUrl: SortOrder
+  updatedAt: SortOrder
+  uploadUrl: SortOrder
+  uploaded: SortOrder
+}
+
+"Files subscription filter"
+input FileSubscriptionFilter {
+  mutation_in: [MutationType]
+  node: FileFilter
+  updatedFields: UpdatedFieldsFilter
+}
+
+"Files update input"
+input FileUpdateByFilterInput {
+  downloadUrl: [UpdateByFilterStringInput]
+  fields: [UpdateByFilterJsonInput]
+  filename: [UpdateByFilterStringInput]
+  meta: [UpdateByFilterJsonInput]
+  mods: [UpdateByFilterJsonInput]
+  provider: [UpdateByFilterStringInput]
+  public: [UpdateByFilterBooleanSwitchInput]
+  shareUrl: [UpdateByFilterStringInput]
+  uploadUrl: [UpdateByFilterStringInput]
+  uploaded: [UpdateByFilterBooleanSwitchInput]
+}
+
+"Files update input"
+input FileUpdateInput {
+  fileId: String
+  filename: String
+  id: ID
+  meta: JSON
+  mods: JSON
+  products_picture: FilesProducts_pictureUpdateRelationInput
+  public: Boolean
+  teamMembers_avatar: FilesTeamMembers_avatarUpdateRelationInput
+  users_avatar: FilesUsers_avatarUpdateRelationInput
+}
+
+"Files relation input"
+input FilesProducts_pictureRelationInput {
+  connect: [ProductKeyFilter!]
+  create: [Picture_ProductCreateInput]
+}
+
+"Files relation input"
+input FilesProducts_pictureUpdateRelationInput {
+  connect: [ProductKeyFilter!]
+  create: [Picture_ProductCreateInput]
+  disconnect: [ProductKeyFilter!]
+  reconnect: [ProductKeyFilter!]
+  update: [Picture_ProductUpdateInput]
+}
+
+"Files relation input"
+input FilesTeamMembers_avatarRelationInput {
+  connect: [TeamMemberKeyFilter!]
+}
+
+"Files relation input"
+input FilesTeamMembers_avatarUpdateRelationInput {
+  connect: [TeamMemberKeyFilter!]
+  disconnect: [TeamMemberKeyFilter!]
+  reconnect: [TeamMemberKeyFilter!]
+  update: [Avatar_TeamMemberUpdateInput]
+}
+
+"Files relation input"
+input FilesUsers_avatarRelationInput {
+  connect: [UserKeyFilter!]
+  create: [Avatar_UserCreateInput]
+}
+
+"Files relation input"
+input FilesUsers_avatarUpdateRelationInput {
+  connect: [UserKeyFilter!]
+  create: [Avatar_UserCreateInput]
+  disconnect: [UserKeyFilter!]
+  reconnect: [UserKeyFilter!]
+  update: [Avatar_UserUpdateInput]
+}
+
+input FloatPredicate {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  is_empty: Boolean
+  is_not_empty: Boolean
+  lt: Float
+  lte: Float
+  not_equals: Float
+  not_in: [Float!]
+}
+
+input FloatPredicateHaving {
+  AND: [FloatPredicateHaving!]
+  OR: [FloatPredicateHaving!]
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  is_empty: Boolean
+  is_not_empty: Boolean
+  lt: Float
+  lte: Float
+  not_equals: Float
+  not_in: [Float!]
+}
+
+"FunctionInfoFilter"
+input FunctionInfoFilter {
+  description: String
+  functionType: FunctionType
+  name: String
+}
+
+"Github connection params input"
+input GithubOptionsInput {
+  client_id: String!
+  client_secret: String!
+  enabled: Boolean!
+}
+
+"Google connection params input"
+input GoogleOptionsInput {
+  client_id: String!
+  client_secret: String!
+  enabled: Boolean!
+}
+
+input GroupByField {
+  as: String
+  fn: [GroupByFieldFunction]
+}
+
+input GroupByFieldFunction {
+  abs: Boolean
+  aggregate: AggregationFunctionType
+  ascii: Boolean
+  bitLength: Boolean
+  ceil: Boolean
+  charLength: Boolean
+  crc32: Boolean
+  datePart: DatePartFunctionType
+  distinct: Boolean
+  floor: Boolean
+  hex: Boolean
+  ifNull: String
+  isNull: Boolean
+  left: Int
+  length: Boolean
+  like: PatternFunctionArguments
+  locate: LocateFunctionArguments
+  lower: Boolean
+  lpad: StringPadFunctionArguments
+  ltrim: Boolean
+  mod: Int
+  notLike: PatternFunctionArguments
+  nullIf: String
+  replace: ReplaceFunctionArguments
+  reverse: Boolean
+  right: Int
+  round: Int
+  rpad: StringPadFunctionArguments
+  rtrim: Boolean
+  sign: Boolean
+  substring: SubstringFunctionArguments
+  trim: TrimFunctionArguments
+  truncate: Int
+  upper: Boolean
+}
+
+input GroupBySort {
+  alias: String!
+  direction: SortOrder!
+}
+
+input GroupIdentifiersGroupByField {
+  as: String!
+}
+
+input Having {
+  AND: [Having!]
+  OR: [Having!]
+  alias: String
+  bigint: BigIntPredicateHaving
+  bool: BoolPredicateHaving
+  date: DatePredicateHaving
+  datetime: DateTimePredicateHaving
+  float: FloatPredicateHaving
+  id: IDPredicateHaving
+  int: IntPredicateHaving
+  string: StringPredicateHaving
+}
+
+input IDPredicate {
+  contains: ID
+  ends_with: ID
+  equals: ID
+  gt: ID
+  gte: ID
+  in: [ID!]
+  is_empty: Boolean
+  is_not_empty: Boolean
+  lt: ID
+  lte: ID
+  not_contains: ID
+  not_ends_with: ID
+  not_equals: ID
+  not_in: [ID!]
+  not_starts_with: ID
+  starts_with: ID
+}
+
+input IDPredicateHaving {
+  AND: [IDPredicateHaving!]
+  OR: [IDPredicateHaving!]
+  contains: ID
+  ends_with: ID
+  equals: ID
+  gt: ID
+  gte: ID
+  in: [ID!]
+  is_empty: Boolean
+  is_not_empty: Boolean
+  lt: ID
+  lte: ID
+  not_contains: ID
+  not_ends_with: ID
+  not_equals: ID
+  not_in: [ID!]
+  not_starts_with: ID
+  starts_with: ID
+}
+
+"Table Create Index Input"
+input IndexCreateInput {
+  columns: [TableIndexColumnInput!]!
+  force: Boolean
+  name: String
+  tableId: ID!
+  type: TableIndexType!
+}
+
+"Table Delete Index Input"
+input IndexDeleteInput {
+  id: ID!
+}
+
+"Table Update Index Input"
+input IndexUpdateInput {
+  columns: [TableIndexColumnInput!]
+  force: Boolean
+  id: ID!
+  name: String
+  type: TableIndexType
+}
+
+input IntPredicate {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  is_empty: Boolean
+  is_not_empty: Boolean
+  lt: Int
+  lte: Int
+  not_equals: Int
+  not_in: [Int!]
+}
+
+input IntPredicateHaving {
+  AND: [IntPredicateHaving!]
+  OR: [IntPredicateHaving!]
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  is_empty: Boolean
+  is_not_empty: Boolean
+  lt: Int
+  lte: Int
+  not_equals: Int
+  not_in: [Int!]
+}
+
+"InviteMembersInput"
+input InviteMembersInput {
+  recipients: [InviteRecipientInput!]!
+}
+
+"InviteRecipientInput"
+input InviteRecipientInput {
+  email: String!
+  firstName: String
+  lastName: String
+  roles: [ID!]
+}
+
+"InvokeData"
+input InvokeData {
+  functionName: String!
+  inputArgs: String
+}
+
+input LocateFunctionArguments {
+  pos: Int
+  str: String!
+}
+
+"Orders create input"
+input OrderCreateInput {
+  address: String!
+  client: OrdersClientRelationInput
+  comment: String
+  deliveryDt: DateTime!
+  orderItems: OrdersOrderItemsRelationInput
+  status: String = "Opened"
+}
+
+"Orders create many input"
+input OrderCreateManyInput {
+  address: String!
+  comment: String
+  deliveryDt: DateTime!
+  status: String = "Opened"
+}
+
+"Orders delete input"
+input OrderDeleteInput {
+  force: Boolean
+  id: ID
+}
+
+"OrderFieldsPermissions create input"
+input OrderFieldsPermissions {
+  address: Boolean
+  comment: Boolean
+  createdAt: Boolean
+  deliveryDt: Boolean
+  status: Boolean
+  updatedAt: Boolean
+}
+
+input OrderFilter {
+  AND: [OrderFilter!]
+  OR: [OrderFilter!]
+  _fullText: String
+  address: StringPredicate
+  client: ClientFilter
+  comment: StringPredicate
+  createdAt: DateTimePredicate
+  createdBy: UserFilter
+  deliveryDt: DateTimePredicate
+  id: IDPredicate
+  orderItems: OrderItemRelationFilter
+  status: StringPredicate
+  updatedAt: DateTimePredicate
+}
+
+input OrderGroupBy {
+  first: Int
+  having: Having
+  last: Int
+  query: OrderGroupByQuery!
+  skip: Int
+  sort: [GroupBySort!]
+}
+
+input OrderGroupByQuery {
+  _group: [GroupIdentifiersGroupByField!]
+  address: [GroupByField!]
+  client: ClientGroupByQuery
+  comment: [GroupByField!]
+  createdAt: [GroupByField!]
+  createdBy: UserGroupByQuery
+  deliveryDt: [GroupByField!]
+  id: [GroupByField!]
+  orderItems: OrderItemGroupByQuery
+  status: [GroupByField!]
+  updatedAt: [GroupByField!]
+}
+
+"OrderItems create input"
+input OrderItemCreateInput {
+  order: OrderItemsOrderRelationInput
+  product: OrderItemsProductRelationInput
+  quantity: Int!
+}
+
+"OrderItems create many input"
+input OrderItemCreateManyInput {
+  quantity: Int!
+}
+
+"OrderItems delete input"
+input OrderItemDeleteInput {
+  force: Boolean
+  id: ID
+}
+
+"OrderItemFieldsPermissions create input"
+input OrderItemFieldsPermissions {
+  createdAt: Boolean
+  quantity: Boolean
+  updatedAt: Boolean
+}
+
+input OrderItemFilter {
+  AND: [OrderItemFilter!]
+  OR: [OrderItemFilter!]
+  _fullText: String
+  createdAt: DateTimePredicate
+  createdBy: UserFilter
+  id: IDPredicate
+  order: OrderFilter
+  product: ProductFilter
+  quantity: IntPredicate
+  updatedAt: DateTimePredicate
+}
+
+input OrderItemGroupBy {
+  first: Int
+  having: Having
+  last: Int
+  query: OrderItemGroupByQuery!
+  skip: Int
+  sort: [GroupBySort!]
+}
+
+input OrderItemGroupByQuery {
+  _group: [GroupIdentifiersGroupByField!]
+  createdAt: [GroupByField!]
+  createdBy: UserGroupByQuery
+  id: [GroupByField!]
+  order: OrderGroupByQuery
+  product: ProductGroupByQuery
+  quantity: [GroupByField!]
+  updatedAt: [GroupByField!]
+}
+
+input OrderItemKeyFilter {
+  id: ID
+}
+
+input OrderItemRelationFilter {
+  every: OrderItemFilter
+  none: OrderItemFilter
+  some: OrderItemFilter
+}
+
+input OrderItemSort {
+  createdAt: SortOrder
+  createdBy: UserSort
+  id: SortOrder
+  order: OrderSort
+  product: ProductSort
+  quantity: SortOrder
+  updatedAt: SortOrder
+}
+
+"OrderItems subscription filter"
+input OrderItemSubscriptionFilter {
+  mutation_in: [MutationType]
+  node: OrderItemFilter
+  updatedFields: UpdatedFieldsFilter
+}
+
+"OrderItems update input"
+input OrderItemUpdateByFilterInput {
+  quantity: [UpdateByFilterIntInput]
+}
+
+"OrderItems update input"
+input OrderItemUpdateInput {
+  id: ID
+  order: OrderItemsOrderUpdateRelationInput
+  product: OrderItemsProductUpdateRelationInput
+  quantity: Int
+}
+
+"OrderItems relation input"
+input OrderItemsOrderRelationInput {
+  connect: OrderKeyFilter
+  create: OrderItems_OrderCreateInput
+}
+
+"OrderItems relation input"
+input OrderItemsOrderUpdateRelationInput {
+  connect: OrderKeyFilter
+  create: OrderItems_OrderCreateInput
+  disconnect: OrderKeyFilter
+  reconnect: OrderKeyFilter
+  update: OrderItems_OrderUpdateInput
+}
+
+"OrderItems relation input"
+input OrderItemsProductRelationInput {
+  connect: ProductKeyFilter
+  create: OrderItems_ProductCreateInput
+}
+
+"OrderItems relation input"
+input OrderItemsProductUpdateRelationInput {
+  connect: ProductKeyFilter
+  create: OrderItems_ProductCreateInput
+  disconnect: ProductKeyFilter
+  reconnect: ProductKeyFilter
+  update: OrderItems_ProductUpdateInput
+}
+
+"Orders create input from orderItems"
+input OrderItems_OrderCreateInput {
+  address: String!
+  client: OrdersClientRelationInput
+  comment: String
+  deliveryDt: DateTime!
+  orderItems: OrdersOrderItemsRelationInput
+  status: String = "Opened"
+}
+
+"Orders update input from orderItems"
+input OrderItems_OrderUpdateInput {
+  address: String
+  client: OrdersClientUpdateRelationInput
+  comment: String
+  deliveryDt: DateTime
+  orderItems: OrdersOrderItemsUpdateRelationInput
+  status: String
+}
+
+"Products create input from orderItems"
+input OrderItems_ProductCreateInput {
+  description: String
+  name: String!
+  orderItems: ProductsOrderItemsRelationInput
+  picture: ProductsPictureRelationInput
+  price: Float!
+}
+
+"Products update input from orderItems"
+input OrderItems_ProductUpdateInput {
+  description: String
+  name: String
+  orderItems: ProductsOrderItemsUpdateRelationInput
+  picture: ProductsPictureUpdateRelationInput
+  price: Float
+}
+
+input OrderKeyFilter {
+  id: ID
+}
+
+input OrderRelationFilter {
+  every: OrderFilter
+  none: OrderFilter
+  some: OrderFilter
+}
+
+input OrderSort {
+  address: SortOrder
+  client: ClientSort
+  comment: SortOrder
+  createdAt: SortOrder
+  createdBy: UserSort
+  deliveryDt: SortOrder
+  id: SortOrder
+  status: SortOrder
+  updatedAt: SortOrder
+}
+
+"Orders subscription filter"
+input OrderSubscriptionFilter {
+  mutation_in: [MutationType]
+  node: OrderFilter
+  updatedFields: UpdatedFieldsFilter
+}
+
+"Orders update input"
+input OrderUpdateByFilterInput {
+  address: [UpdateByFilterStringInput]
+  comment: [UpdateByFilterStringInput]
+  deliveryDt: [UpdateByFilterDateTimeInput]
+  status: [UpdateByFilterStringSwitchInput]
+}
+
+"Orders update input"
+input OrderUpdateInput {
+  address: String
+  client: OrdersClientUpdateRelationInput
+  comment: String
+  deliveryDt: DateTime
+  id: ID
+  orderItems: OrdersOrderItemsUpdateRelationInput
+  status: String
+}
+
+"OrderItems create input from order"
+input Order_OrderItemCreateInput {
+  order: OrderItemsOrderRelationInput
+  product: OrderItemsProductRelationInput
+  quantity: Int!
+}
+
+"OrderItems update input from order"
+input Order_OrderItemUpdateInput {
+  data: OrderItemUpdateInput!
+  filter: OrderItemKeyFilter
+}
+
+"Orders relation input"
+input OrdersClientRelationInput {
+  connect: ClientKeyFilter
+  create: Orders_ClientCreateInput
+}
+
+"Orders relation input"
+input OrdersClientUpdateRelationInput {
+  connect: ClientKeyFilter
+  create: Orders_ClientCreateInput
+  disconnect: ClientKeyFilter
+  reconnect: ClientKeyFilter
+  update: Orders_ClientUpdateInput
+}
+
+"Orders relation input"
+input OrdersOrderItemsRelationInput {
+  connect: [OrderItemKeyFilter!]
+  create: [Order_OrderItemCreateInput]
+}
+
+"Orders relation input"
+input OrdersOrderItemsUpdateRelationInput {
+  connect: [OrderItemKeyFilter!]
+  create: [Order_OrderItemCreateInput]
+  disconnect: [OrderItemKeyFilter!]
+  reconnect: [OrderItemKeyFilter!]
+  update: [Order_OrderItemUpdateInput]
+}
+
+"Clients create input from orders"
+input Orders_ClientCreateInput {
+  birthday: Date!
+  email: String!
+  firstName: String!
+  lastName: String!
+  orders: ClientsOrdersRelationInput
+  phone: String!
+}
+
+"Clients update input from orders"
+input Orders_ClientUpdateInput {
+  birthday: Date
+  email: String
+  firstName: String
+  lastName: String
+  orders: ClientsOrdersUpdateRelationInput
+  phone: String
+}
+
+input PatternFunctionArguments {
+  escape: String
+  pattern: String!
+}
+
+input PermissionFilter {
+  AND: [PermissionFilter!]
+  OR: [PermissionFilter!]
+  _fullText: String
+  appId: StringPredicate
+  createdAt: DateTimePredicate
+  createdBy: UserFilter
+  resource: StringPredicate
+  resourceType: StringPredicate
+  role: RoleFilter
+  updatedAt: DateTimePredicate
+}
+
+input PermissionGroupByQuery {
+  _group: [GroupIdentifiersGroupByField!]
+  appId: [GroupByField!]
+  createdAt: [GroupByField!]
+  createdBy: UserGroupByQuery
+  permission: [GroupByField!]
+  resource: [GroupByField!]
+  resourceType: [GroupByField!]
+  role: RoleGroupByQuery
+  updatedAt: [GroupByField!]
+}
+
+"Permission Filter"
+input PermissionInputFilter {
+  action: String
+  applicationName: String
+  resource: String
+  resourceType: PermissionResourceTypeEnum
+}
+
+input PermissionRelationFilter {
+  every: PermissionFilter
+  none: PermissionFilter
+  some: PermissionFilter
+}
+
+"Permissions subscription filter"
+input PermissionSubscriptionFilter {
+  mutation_in: [MutationType]
+  node: PermissionFilter
+  updatedFields: UpdatedFieldsFilter
+}
+
+"custom permissions input"
+input PermissionsCustom {
+  data: PermissionsCustomData
+  logic: PermissionsCustomLogic
+  settings: PermissionsCustomSettings
+  users: PermissionsCustomUsers
+}
+
+input PermissionsCustomData {
+  schemaManagement: PermissionsCustomDataSchemaManagement
+  viewerAccess: PermissionsCustomDataViewerAccess
+}
+
+input PermissionsCustomDataSchemaManagement {
+  allow: Boolean!
+}
+
+input PermissionsCustomDataViewerAccess {
+  allow: Boolean!
+}
+
+input PermissionsCustomLogic {
+  deploy: PermissionsCustomLogicDeploy
+  invoke: PermissionsCustomLogicInvoke
+  logs: PermissionsCustomLogicLogs
+  view: PermissionsCustomLogicView
+}
+
+input PermissionsCustomLogicDeploy {
+  allow: Boolean!
+}
+
+input PermissionsCustomLogicInvoke {
+  allow: Boolean!
+}
+
+input PermissionsCustomLogicLogs {
+  allow: Boolean!
+}
+
+input PermissionsCustomLogicView {
+  allow: Boolean!
+}
+
+input PermissionsCustomSettings {
+  workspaceAdministration: PermissionsCustomSettingsWorkspaceAdministration
+}
+
+input PermissionsCustomSettingsWorkspaceAdministration {
+  allow: Boolean!
+}
+
+input PermissionsCustomUsers {
+  teamAdministration: PermissionsCustomUsersTeamAdministration
+}
+
+input PermissionsCustomUsersTeamAdministration {
+  allow: Boolean!
+}
+
+"Schema tables permissions input"
+input PermissionsData {
+  Clients: PermissionsDataClients
+  Files: PermissionsDataFiles
+  OrderItems: PermissionsDataOrderItems
+  Orders: PermissionsDataOrders
+  Products: PermissionsDataProducts
+  Roles: PermissionsDataRoles
+  Users: PermissionsDataUsers
+}
+
+input PermissionsDataClients {
+  create: PermissionsDataClientsCreate
+  delete: PermissionsDataClientsDelete
+  read: PermissionsDataClientsRead
+  update: PermissionsDataClientsUpdate
+}
+
+input PermissionsDataClientsCreate {
+  allow: Boolean!
+}
+
+input PermissionsDataClientsDelete {
+  allow: Boolean!
+}
+
+input PermissionsDataClientsRead {
+  allow: Boolean!
+  fields: ClientFieldsPermissions
+  filter: ClientFilter
+}
+
+input PermissionsDataClientsUpdate {
+  allow: Boolean!
+  fields: ClientFieldsPermissions
+  filter: ClientFilter
+}
+
+input PermissionsDataFiles {
+  create: PermissionsDataFilesCreate
+  delete: PermissionsDataFilesDelete
+  read: PermissionsDataFilesRead
+  update: PermissionsDataFilesUpdate
+}
+
+input PermissionsDataFilesCreate {
+  allow: Boolean!
+}
+
+input PermissionsDataFilesDelete {
+  allow: Boolean!
+}
+
+input PermissionsDataFilesRead {
+  allow: Boolean!
+  fields: FileFieldsPermissions
+  filter: FileFilter
+}
+
+input PermissionsDataFilesUpdate {
+  allow: Boolean!
+  fields: FileFieldsPermissions
+  filter: FileFilter
+}
+
+input PermissionsDataOrderItems {
+  create: PermissionsDataOrderItemsCreate
+  delete: PermissionsDataOrderItemsDelete
+  read: PermissionsDataOrderItemsRead
+  update: PermissionsDataOrderItemsUpdate
+}
+
+input PermissionsDataOrderItemsCreate {
+  allow: Boolean!
+}
+
+input PermissionsDataOrderItemsDelete {
+  allow: Boolean!
+}
+
+input PermissionsDataOrderItemsRead {
+  allow: Boolean!
+  fields: OrderItemFieldsPermissions
+  filter: OrderItemFilter
+}
+
+input PermissionsDataOrderItemsUpdate {
+  allow: Boolean!
+  fields: OrderItemFieldsPermissions
+  filter: OrderItemFilter
+}
+
+input PermissionsDataOrders {
+  create: PermissionsDataOrdersCreate
+  delete: PermissionsDataOrdersDelete
+  read: PermissionsDataOrdersRead
+  update: PermissionsDataOrdersUpdate
+}
+
+input PermissionsDataOrdersCreate {
+  allow: Boolean!
+}
+
+input PermissionsDataOrdersDelete {
+  allow: Boolean!
+}
+
+input PermissionsDataOrdersRead {
+  allow: Boolean!
+  fields: OrderFieldsPermissions
+  filter: OrderFilter
+}
+
+input PermissionsDataOrdersUpdate {
+  allow: Boolean!
+  fields: OrderFieldsPermissions
+  filter: OrderFilter
+}
+
+input PermissionsDataProducts {
+  create: PermissionsDataProductsCreate
+  delete: PermissionsDataProductsDelete
+  read: PermissionsDataProductsRead
+  update: PermissionsDataProductsUpdate
+}
+
+input PermissionsDataProductsCreate {
+  allow: Boolean!
+}
+
+input PermissionsDataProductsDelete {
+  allow: Boolean!
+}
+
+input PermissionsDataProductsRead {
+  allow: Boolean!
+  fields: ProductFieldsPermissions
+  filter: ProductFilter
+}
+
+input PermissionsDataProductsUpdate {
+  allow: Boolean!
+  fields: ProductFieldsPermissions
+  filter: ProductFilter
+}
+
+input PermissionsDataRoles {
+  create: PermissionsDataRolesCreate
+  delete: PermissionsDataRolesDelete
+  read: PermissionsDataRolesRead
+  update: PermissionsDataRolesUpdate
+}
+
+input PermissionsDataRolesCreate {
+  allow: Boolean!
+}
+
+input PermissionsDataRolesDelete {
+  allow: Boolean!
+}
+
+input PermissionsDataRolesRead {
+  allow: Boolean!
+  fields: RoleFieldsPermissions
+  filter: RoleFilter
+}
+
+input PermissionsDataRolesUpdate {
+  allow: Boolean!
+  fields: RoleFieldsPermissions
+  filter: RoleFilter
+}
+
+input PermissionsDataUsers {
+  create: PermissionsDataUsersCreate
+  delete: PermissionsDataUsersDelete
+  read: PermissionsDataUsersRead
+  update: PermissionsDataUsersUpdate
+}
+
+input PermissionsDataUsersCreate {
+  allow: Boolean!
+}
+
+input PermissionsDataUsersDelete {
+  allow: Boolean!
+}
+
+input PermissionsDataUsersRead {
+  allow: Boolean!
+  fields: UserFieldsPermissions
+  filter: UserFilter
+}
+
+input PermissionsDataUsersUpdate {
+  allow: Boolean!
+  fields: UserFieldsPermissions
+  filter: UserFilter
+}
+
+"PermissionsInput create input"
+input PermissionsInput {
+  custom: PermissionsCustom
+  data: PermissionsData
+}
+
+"Products create input from picture"
+input Picture_ProductCreateInput {
+  description: String
+  name: String!
+  orderItems: ProductsOrderItemsRelationInput
+  picture: ProductsPictureRelationInput
+  price: Float!
+}
+
+"Products update input from picture"
+input Picture_ProductUpdateInput {
+  data: ProductUpdateInput!
+  filter: ProductKeyFilter
+}
+
+"Products create input"
+input ProductCreateInput {
+  description: String
+  name: String!
+  orderItems: ProductsOrderItemsRelationInput
+  picture: ProductsPictureRelationInput
+  price: Float!
+}
+
+"Products create many input"
+input ProductCreateManyInput {
+  description: String
+  name: String!
+  price: Float!
+}
+
+"Products delete input"
+input ProductDeleteInput {
+  force: Boolean
+  id: ID
+}
+
+"ProductFieldsPermissions create input"
+input ProductFieldsPermissions {
+  createdAt: Boolean
+  description: Boolean
+  name: Boolean
+  price: Boolean
+  updatedAt: Boolean
+}
+
+input ProductFilter {
+  AND: [ProductFilter!]
+  OR: [ProductFilter!]
+  _fullText: String
+  createdAt: DateTimePredicate
+  createdBy: UserFilter
+  description: StringPredicate
+  id: IDPredicate
+  name: StringPredicate
+  orderItems: OrderItemRelationFilter
+  picture: FileFilter
+  price: FloatPredicate
+  updatedAt: DateTimePredicate
+}
+
+input ProductGroupBy {
+  first: Int
+  having: Having
+  last: Int
+  query: ProductGroupByQuery!
+  skip: Int
+  sort: [GroupBySort!]
+}
+
+input ProductGroupByQuery {
+  _group: [GroupIdentifiersGroupByField!]
+  createdAt: [GroupByField!]
+  createdBy: UserGroupByQuery
+  description: [GroupByField!]
+  id: [GroupByField!]
+  name: [GroupByField!]
+  orderItems: OrderItemGroupByQuery
+  picture: FileGroupByQuery
+  price: [GroupByField!]
+  updatedAt: [GroupByField!]
+}
+
+input ProductKeyFilter {
+  id: ID
+}
+
+input ProductRelationFilter {
+  every: ProductFilter
+  none: ProductFilter
+  some: ProductFilter
+}
+
+input ProductSort {
+  createdAt: SortOrder
+  createdBy: UserSort
+  description: SortOrder
+  id: SortOrder
+  name: SortOrder
+  picture: FileSort
+  price: SortOrder
+  updatedAt: SortOrder
+}
+
+"Products subscription filter"
+input ProductSubscriptionFilter {
+  mutation_in: [MutationType]
+  node: ProductFilter
+  updatedFields: UpdatedFieldsFilter
+}
+
+"Products update input"
+input ProductUpdateByFilterInput {
+  description: [UpdateByFilterStringInput]
+  name: [UpdateByFilterStringInput]
+  price: [UpdateByFilterIntInput]
+}
+
+"Products update input"
+input ProductUpdateInput {
+  description: String
+  id: ID
+  name: String
+  orderItems: ProductsOrderItemsUpdateRelationInput
+  picture: ProductsPictureUpdateRelationInput
+  price: Float
+}
+
+"OrderItems create input from product"
+input Product_OrderItemCreateInput {
+  order: OrderItemsOrderRelationInput
+  product: OrderItemsProductRelationInput
+  quantity: Int!
+}
+
+"OrderItems update input from product"
+input Product_OrderItemUpdateInput {
+  data: OrderItemUpdateInput!
+  filter: OrderItemKeyFilter
+}
+
+"Products relation input"
+input ProductsOrderItemsRelationInput {
+  connect: [OrderItemKeyFilter!]
+  create: [Product_OrderItemCreateInput]
+}
+
+"Products relation input"
+input ProductsOrderItemsUpdateRelationInput {
+  connect: [OrderItemKeyFilter!]
+  create: [Product_OrderItemCreateInput]
+  disconnect: [OrderItemKeyFilter!]
+  reconnect: [OrderItemKeyFilter!]
+  update: [Product_OrderItemUpdateInput]
+}
+
+"Products relation input"
+input ProductsPictureRelationInput {
+  connect: FileKeyFilter
+  create: Products_picture_FileCreateInput
+}
+
+"Products relation input"
+input ProductsPictureUpdateRelationInput {
+  connect: FileKeyFilter
+  create: Products_picture_FileCreateInput
+  disconnect: FileKeyFilter
+  reconnect: FileKeyFilter
+  update: Products_picture_FileUpdateInput
+}
+
+"Files create input from products_picture"
+input Products_picture_FileCreateInput {
+  fileId: String
+  filename: String
+  meta: JSON
+  mods: JSON
+  products_picture: FilesProducts_pictureRelationInput
+  public: Boolean = false
+  teamMembers_avatar: FilesTeamMembers_avatarRelationInput
+  users_avatar: FilesUsers_avatarRelationInput
+}
+
+"Files update input from products_picture"
+input Products_picture_FileUpdateInput {
+  fileId: String
+  filename: String
+  meta: JSON
+  mods: JSON
+  products_picture: FilesProducts_pictureUpdateRelationInput
+  public: Boolean
+  teamMembers_avatar: FilesTeamMembers_avatarUpdateRelationInput
+  users_avatar: FilesUsers_avatarUpdateRelationInput
+}
+
+"RefreshTokenInput"
+input RefreshTokenInput {
+  authProfileId: ID
+  email: String
+  refreshToken: String!
+}
+
+"Relation Create Input"
+input RelationCreateInput {
+  refFieldDisplayName: String
+  refFieldIsList: Boolean!
+  refFieldIsRequired: Boolean!
+  refFieldName: String
+  refTableId: ID!
+}
+
+"Relation Update Input"
+input RelationUpdateInput {
+  refFieldDisplayName: String
+  refFieldIsList: Boolean
+  refFieldIsRequired: Boolean
+  refFieldName: String
+  refTableId: ID
+}
+
+input ReplaceFunctionArguments {
+  from: String!
+  to: String!
+}
+
+"Roles create input"
+input RoleCreateInput {
+  apiTokens: RolesApiTokensRelationInput
+  authenticationProfiles: RolesAuthenticationProfilesRelationInput
+  description: String
+  name: String!
+  permissions: PermissionsInput
+  teamMembers: RolesTeamMembersRelationInput
+  users: RolesUsersRelationInput
+}
+
+"Roles create many input"
+input RoleCreateManyInput {
+  description: String
+  name: String!
+}
+
+"Roles delete input"
+input RoleDeleteInput {
+  force: Boolean
+  id: ID
+}
+
+"RoleFieldsPermissions create input"
+input RoleFieldsPermissions {
+  createdAt: Boolean
+  description: Boolean
+  name: Boolean
+  updatedAt: Boolean
+}
+
+input RoleFilter {
+  AND: [RoleFilter!]
+  OR: [RoleFilter!]
+  _fullText: String
+  apiTokens: ApiTokenRelationFilter
+  authenticationProfiles: AuthenticationProfileRelationFilter
+  createdAt: DateTimePredicate
+  createdBy: UserFilter
+  description: StringPredicate
+  id: IDPredicate
+  name: StringPredicate
+  permissions: PermissionRelationFilter
+  teamMembers: TeamMemberRelationFilter
+  updatedAt: DateTimePredicate
+  users: UserRelationFilter
+}
+
+input RoleGroupBy {
+  first: Int
+  having: Having
+  last: Int
+  query: RoleGroupByQuery!
+  skip: Int
+  sort: [GroupBySort!]
+}
+
+input RoleGroupByQuery {
+  _group: [GroupIdentifiersGroupByField!]
+  apiTokens: ApiTokenGroupByQuery
+  authenticationProfiles: AuthenticationProfileGroupByQuery
+  createdAt: [GroupByField!]
+  createdBy: UserGroupByQuery
+  description: [GroupByField!]
+  id: [GroupByField!]
+  name: [GroupByField!]
+  permissions: PermissionGroupByQuery
+  teamMembers: TeamMemberGroupByQuery
+  updatedAt: [GroupByField!]
+  users: UserGroupByQuery
+}
+
+input RoleKeyFilter {
+  id: ID
+  name: String
+}
+
+input RoleRelationFilter {
+  every: RoleFilter
+  none: RoleFilter
+  some: RoleFilter
+}
+
+input RoleSort {
+  createdAt: SortOrder
+  createdBy: UserSort
+  description: SortOrder
+  id: SortOrder
+  name: SortOrder
+  updatedAt: SortOrder
+}
+
+"Roles subscription filter"
+input RoleSubscriptionFilter {
+  mutation_in: [MutationType]
+  node: RoleFilter
+  updatedFields: UpdatedFieldsFilter
+}
+
+"Roles update input"
+input RoleUpdateByFilterInput {
+  description: [UpdateByFilterStringInput]
+  name: [UpdateByFilterStringInput]
+  systemType: [UpdateByFilterStringInput]
+}
+
+"Roles update input"
+input RoleUpdateInput {
+  apiTokens: RolesApiTokensUpdateRelationInput
+  authenticationProfiles: RolesAuthenticationProfilesUpdateRelationInput
+  description: String
+  id: ID
+  name: String
+  permissions: PermissionsInput
+  teamMembers: RolesTeamMembersUpdateRelationInput
+  users: RolesUsersUpdateRelationInput
+}
+
+"Roles relation input"
+input RolesApiTokensRelationInput {
+  connect: [ApiTokenKeyFilter!]
+}
+
+"Roles relation input"
+input RolesApiTokensUpdateRelationInput {
+  connect: [ApiTokenKeyFilter!]
+  disconnect: [ApiTokenKeyFilter!]
+  reconnect: [ApiTokenKeyFilter!]
+  update: [Roles_ApiTokenUpdateInput]
+}
+
+"Roles relation input"
+input RolesAuthenticationProfilesRelationInput {
+  connect: [AuthenticationProfileKeyFilter!]
+  create: [Roles_AuthenticationProfileCreateInput]
+}
+
+"Roles relation input"
+input RolesAuthenticationProfilesUpdateRelationInput {
+  connect: [AuthenticationProfileKeyFilter!]
+  create: [Roles_AuthenticationProfileCreateInput]
+  disconnect: [AuthenticationProfileKeyFilter!]
+  reconnect: [AuthenticationProfileKeyFilter!]
+  update: [Roles_AuthenticationProfileUpdateInput]
+}
+
+"Roles relation input"
+input RolesTeamMembersRelationInput {
+  connect: [TeamMemberKeyFilter!]
+}
+
+"Roles relation input"
+input RolesTeamMembersUpdateRelationInput {
+  connect: [TeamMemberKeyFilter!]
+  disconnect: [TeamMemberKeyFilter!]
+  reconnect: [TeamMemberKeyFilter!]
+  update: [Roles_TeamMemberUpdateInput]
+}
+
+"Roles relation input"
+input RolesUsersRelationInput {
+  connect: [UserKeyFilter!]
+  create: [Roles_UserCreateInput]
+}
+
+"Roles relation input"
+input RolesUsersUpdateRelationInput {
+  connect: [UserKeyFilter!]
+  create: [Roles_UserCreateInput]
+  disconnect: [UserKeyFilter!]
+  reconnect: [UserKeyFilter!]
+  update: [Roles_UserUpdateInput]
+}
+
+"ApiTokens update input from roles"
+input Roles_ApiTokenUpdateInput {
+  data: ApiTokenUpdateInput!
+  filter: ApiTokenKeyFilter
+}
+
+"AuthenticationProfiles create input from roles"
+input Roles_AuthenticationProfileCreateInput {
+  audiences: [String]
+  clientId: String
+  databaseName: String
+  domain: String
+  managementDomain: String
+  name: String!
+  roles: AuthenticationProfilesRolesRelationInput
+  secret: String
+  selfSignUpEmailDomains: [String]
+  selfSignUpEnabled: Boolean = false
+  type: String = "8BASE"
+}
+
+"AuthenticationProfiles update input from roles"
+input Roles_AuthenticationProfileUpdateInput {
+  data: AuthenticationProfileUpdateInput!
+  filter: AuthenticationProfileKeyFilter
+}
+
+"TeamMembers update input from roles"
+input Roles_TeamMemberUpdateInput {
+  data: TeamMemberUpdateInput!
+  filter: TeamMemberKeyFilter
+}
+
+"Users create input from roles"
+input Roles_UserCreateInput {
+  avatar: UsersAvatarRelationInput
+  email: String!
+  firstName: String
+  lastName: String
+  roles: UsersRolesRelationInput
+  status: String = "inactive"
+  timezone: String
+}
+
+"Users update input from roles"
+input Roles_UserUpdateInput {
+  data: UserUpdateInput!
+  filter: UserKeyFilter
+}
+
+input SettingFilter {
+  AND: [SettingFilter!]
+  OR: [SettingFilter!]
+  _fullText: String
+  bgColor: StringPredicate
+  buttonLinkColor: StringPredicate
+  containerColor: StringPredicate
+  createdAt: DateTimePredicate
+  createdBy: UserFilter
+  currency: StringPredicate
+  dateFormat: StringPredicate
+  landingPageImage: FileFilter
+  language: StringPredicate
+  leftNavColor: StringPredicate
+  menuBarBGColor: StringPredicate
+  menuBarIconsColor: StringPredicate
+  menuBarLogo: FileFilter
+  passwordMinLength: IntPredicate
+  passwordRequireLowercase: BoolPredicate
+  passwordRequireNumbers: BoolPredicate
+  passwordRequireSpecial: BoolPredicate
+  passwordRequireUppercase: BoolPredicate
+  passwordUpdateInterval: IntPredicate
+  rememberDevice: StringPredicate
+  timezone: StringPredicate
+  updatedAt: DateTimePredicate
+  userInterfaceStyle: StringPredicate
+  vanityUrl: StringPredicate
+}
+
+input SettingGroupBy {
+  first: Int
+  having: Having
+  last: Int
+  query: SettingGroupByQuery!
+  skip: Int
+  sort: [GroupBySort!]
+}
+
+input SettingGroupByQuery {
+  _group: [GroupIdentifiersGroupByField!]
+  bgColor: [GroupByField!]
+  buttonLinkColor: [GroupByField!]
+  containerColor: [GroupByField!]
+  createdAt: [GroupByField!]
+  createdBy: UserGroupByQuery
+  currency: [GroupByField!]
+  dateFormat: [GroupByField!]
+  landingPageImage: FileGroupByQuery
+  language: [GroupByField!]
+  leftNavColor: [GroupByField!]
+  menuBarBGColor: [GroupByField!]
+  menuBarIconsColor: [GroupByField!]
+  menuBarLogo: FileGroupByQuery
+  passwordMinLength: [GroupByField!]
+  passwordRequireLowercase: [GroupByField!]
+  passwordRequireNumbers: [GroupByField!]
+  passwordRequireSpecial: [GroupByField!]
+  passwordRequireUppercase: [GroupByField!]
+  passwordUpdateInterval: [GroupByField!]
+  rememberDevice: [GroupByField!]
+  timezone: [GroupByField!]
+  updatedAt: [GroupByField!]
+  userInterfaceStyle: [GroupByField!]
+  vanityUrl: [GroupByField!]
+}
+
+input SettingRelationFilter {
+  every: SettingFilter
+  none: SettingFilter
+  some: SettingFilter
+}
+
+input SettingSort {
+  bgColor: SortOrder
+  buttonLinkColor: SortOrder
+  containerColor: SortOrder
+  createdAt: SortOrder
+  createdBy: UserSort
+  currency: SortOrder
+  dateFormat: SortOrder
+  landingPageImage: FileSort
+  language: SortOrder
+  leftNavColor: SortOrder
+  menuBarBGColor: SortOrder
+  menuBarIconsColor: SortOrder
+  menuBarLogo: FileSort
+  passwordMinLength: SortOrder
+  passwordRequireLowercase: SortOrder
+  passwordRequireNumbers: SortOrder
+  passwordRequireSpecial: SortOrder
+  passwordRequireUppercase: SortOrder
+  passwordUpdateInterval: SortOrder
+  rememberDevice: SortOrder
+  timezone: SortOrder
+  updatedAt: SortOrder
+  userInterfaceStyle: SortOrder
+  vanityUrl: SortOrder
+}
+
+"Settings subscription filter"
+input SettingSubscriptionFilter {
+  mutation_in: [MutationType]
+  node: SettingFilter
+  updatedFields: UpdatedFieldsFilter
+}
+
+"Settings update input"
+input SettingUpdateInput {
+  bgColor: String
+  buttonLinkColor: String
+  containerColor: String
+  currency: String
+  dateFormat: String
+  language: String
+  leftNavColor: String
+  menuBarBGColor: String
+  menuBarIconsColor: String
+  passwordMinLength: Int
+  passwordRequireLowercase: Boolean
+  passwordRequireNumbers: Boolean
+  passwordRequireSpecial: Boolean
+  passwordRequireUppercase: Boolean
+  passwordUpdateInterval: Int
+  rememberDevice: String
+  timezone: String
+  userInterfaceStyle: String
+  vanityUrl: String
+}
+
+"SignUpResendInput"
+input SignUpResendInput {
+  email: String!
+}
+
+input StringPadFunctionArguments {
+  len: Int!
+  str: String!
+}
+
+input StringPredicate {
+  contains: String
+  ends_with: String
+  equals: String
+  in: [String!]
+  is_empty: Boolean
+  is_not_empty: Boolean
+  not_contains: String
+  not_ends_with: String
+  not_equals: String
+  not_in: [String!]
+  not_starts_with: String
+  starts_with: String
+}
+
+input StringPredicateHaving {
+  AND: [StringPredicateHaving!]
+  OR: [StringPredicateHaving!]
+  contains: String
+  ends_with: String
+  equals: String
+  in: [String!]
+  is_empty: Boolean
+  is_not_empty: Boolean
+  not_contains: String
+  not_ends_with: String
+  not_equals: String
+  not_in: [String!]
+  not_starts_with: String
+  starts_with: String
+}
+
+input SubstringFunctionArguments {
+  len: Int
+  pos: Int!
+}
+
+"ApplicationDeleteMutationInput"
+input SystemApplicationDeleteMutationInput {
+  force: Boolean
+  id: String!
+}
+
+"Application install input"
+input SystemApplicationInstallInput {
+  appType: String!
+  description: String
+  displayName: String
+  name: String!
+  status: SystemApplicationStatusEnum = INACTIVE
+}
+
+"Application update input"
+input SystemApplicationUpdateInput {
+  description: String
+  displayName: String
+  id: String!
+  name: String
+  status: SystemApplicationStatusEnum
+}
+
+"BillingDetailsUpdateMutationInput"
+input SystemBillingDetailsUpdateMutationInput {
+  cardToken: String!
+}
+
+input SystemBillingMetricUsagesListFilter {
+  entryDate: DateTimePredicate!
+}
+
+"BillingPlanUpdateMutationInput"
+input SystemBillingPlanUpdateMutationInput {
+  planId: ID!
+}
+
+"DeployOptions"
+input SystemDeployOptions {
+  extensionNames: [String]
+  mode: SystemDeployModeEnum = ONLY_PROJECT
+  pluginNames: [String]
+}
+
+"DeployingBuildInput"
+input SystemDeployingBuildInput {
+  buildName: String!
+  options: SystemDeployOptions
+}
+
+"Field Type Attributes Input"
+input SystemFieldTypeAttributesInput {
+  autoIncrement: Boolean
+  currency: String
+  expiration: Int
+  fieldSize: Int
+  format: String
+  isBigInt: Boolean
+  listOptions: [String!]
+  maxSize: Int
+  maxValue: Float
+  minValue: Float
+  precision: Int
+  typeRestrictions: [String!]
+}
+
+"FunctionInfoFilter"
+input SystemFunctionInfoFilter {
+  description: String
+  functionType: SystemFunctionType
+  name: String
+}
+
+"Table Create Index Input"
+input SystemIndexCreateInput {
+  columns: [SystemTableIndexColumnInput!]!
+  force: Boolean
+  name: String
+  tableId: ID!
+  type: TableIndexType!
+}
+
+"Table Delete Index Input"
+input SystemIndexDeleteInput {
+  id: ID!
+}
+
+"Table Update Index Input"
+input SystemIndexUpdateInput {
+  columns: [SystemTableIndexColumnInput!]
+  force: Boolean
+  id: ID!
+  name: String
+  type: TableIndexType
+}
+
+"InvokeData"
+input SystemInvokeData {
+  functionName: String!
+  inputArgs: String
+}
+
+"Relation Create Input"
+input SystemRelationCreateInput {
+  refFieldDisplayName: String
+  refFieldIsList: Boolean!
+  refFieldIsRequired: Boolean!
+  refFieldName: String
+  refTableId: ID!
+}
+
+"Relation Update Input"
+input SystemRelationUpdateInput {
+  refFieldDisplayName: String
+  refFieldIsList: Boolean
+  refFieldIsRequired: Boolean
+  refFieldName: String
+  refTableId: ID
+}
+
+"Table Create Input"
+input SystemTableCreateInput {
+  description: String
+  displayName: String
+  name: String!
+}
+
+"Table Delete Input"
+input SystemTableDeleteInput {
+  id: ID!
+}
+
+"Table Field Create Input"
+input SystemTableFieldCreateInput {
+  computedMode: SystemComputedFieldMode
+  defaultValue: String
+  description: String
+  displayName: String
+  expression: String
+  fieldType: SystemFieldType!
+  fieldTypeAttributes: SystemFieldTypeAttributesInput
+  force: Boolean
+  initialValue: String
+  isList: Boolean!
+  isRequired: Boolean!
+  isUnique: Boolean
+  name: String!
+  position: Int
+  relation: SystemRelationCreateInput
+  tableId: ID!
+}
+
+"Table Field Delete Input"
+input SystemTableFieldDeleteInput {
+  id: ID!
+}
+
+"Table Field Position Update Input"
+input SystemTableFieldPositionUpdateInput {
+  id: ID!
+  newPosition: Int!
+}
+
+"Table Field Update Input"
+input SystemTableFieldUpdateInput {
+  computedMode: SystemComputedFieldMode
+  defaultValue: String
+  description: String
+  displayName: String
+  expression: String
+  fieldType: SystemFieldType
+  fieldTypeAttributes: SystemFieldTypeAttributesInput
+  force: Boolean
+  id: ID!
+  initialValue: String
+  isList: Boolean
+  isRequired: Boolean
+  isUnique: Boolean
+  name: String
+  position: Int
+  relation: SystemRelationUpdateInput
+}
+
+"Table Index Column Input"
+input SystemTableIndexColumnInput {
+  name: String!
+}
+
+"Table List Filter"
+input SystemTableListFilter {
+  onlyUserTables: Boolean
+  tableNames: [String]
+}
+
+"Table Update Input"
+input SystemTableUpdateInput {
+  description: String
+  displayName: String
+  id: ID!
+  name: String
+}
+
+"View Create Input"
+input SystemViewCreateInput {
+  description: String
+  displayName: String
+  name: String!
+  query: String!
+}
+
+"View Update Input"
+input SystemViewUpdateInput {
+  description: String
+  displayName: String
+  id: ID!
+  name: String
+  query: String
+}
+
+"WorkspaceCreateMutationInput"
+input SystemWorkspaceCreateMutationInput {
+  billingPlanId: ID
+  name: String!
+}
+
+"WorkspaceDeleteMutationInput"
+input SystemWorkspaceDeleteMutationInput {
+  id: ID!
+}
+
+"WorkspaceUpdateMutationInput"
+input SystemWorkspaceUpdateMutationInput {
+  id: ID!
+  name: String
+}
+
+"Table Create Input"
+input TableCreateInput {
+  description: String
+  displayName: String
+  name: String!
+}
+
+"Table Delete Input"
+input TableDeleteInput {
+  id: ID!
+}
+
+"Table Field Create Input"
+input TableFieldCreateInput {
+  computedMode: ComputedFieldMode
+  defaultValue: String
+  description: String
+  displayName: String
+  expression: String
+  fieldType: FieldType!
+  fieldTypeAttributes: FieldTypeAttributesInput
+  force: Boolean
+  initialValue: String
+  isList: Boolean!
+  isRequired: Boolean!
+  isUnique: Boolean
+  name: String!
+  position: Int
+  relation: RelationCreateInput
+  tableId: ID!
+}
+
+"Table Field Delete Input"
+input TableFieldDeleteInput {
+  id: ID!
+}
+
+"Table Field Position Update Input"
+input TableFieldPositionUpdateInput {
+  id: ID!
+  newPosition: Int!
+}
+
+"Table Field Update Input"
+input TableFieldUpdateInput {
+  computedMode: ComputedFieldMode
+  defaultValue: String
+  description: String
+  displayName: String
+  expression: String
+  fieldType: FieldType
+  fieldTypeAttributes: FieldTypeAttributesInput
+  force: Boolean
+  id: ID!
+  initialValue: String
+  isList: Boolean
+  isRequired: Boolean
+  isUnique: Boolean
+  name: String
+  position: Int
+  relation: RelationUpdateInput
+}
+
+"Table Index Column Input"
+input TableIndexColumnInput {
+  name: String!
+}
+
+"Table List Filter"
+input TableListFilter {
+  onlyUserTables: Boolean
+  tableNames: [String]
+}
+
+"Table Update Input"
+input TableUpdateInput {
+  description: String
+  displayName: String
+  id: ID!
+  name: String
+}
+
+"TeamInvitationAcceptInput"
+input TeamInvitationAcceptInput {
+  accepted: Boolean!
+  uuid: String!
+}
+
+"Cancel team members invitations input"
+input TeamInvitationCancelInput {
+  memberId: ID!
+}
+
+"TeamInvitations delete input"
+input TeamInvitationDeleteInput {
+  force: Boolean
+  id: ID
+}
+
+input TeamInvitationFilter {
+  AND: [TeamInvitationFilter!]
+  OR: [TeamInvitationFilter!]
+  _fullText: String
+  accepted: BoolPredicate
+  acceptedOn: DateTimePredicate
+  createdAt: DateTimePredicate
+  createdBy: UserFilter
+  email: StringPredicate
+  firstName: StringPredicate
+  id: IDPredicate
+  invitedBy: TeamMemberFilter
+  invitee: TeamMemberFilter
+  lastName: StringPredicate
+  resentOn: DateTimePredicate
+  updatedAt: DateTimePredicate
+  uuid: StringPredicate
+}
+
+input TeamInvitationGroupBy {
+  first: Int
+  having: Having
+  last: Int
+  query: TeamInvitationGroupByQuery!
+  skip: Int
+  sort: [GroupBySort!]
+}
+
+input TeamInvitationGroupByQuery {
+  _group: [GroupIdentifiersGroupByField!]
+  accepted: [GroupByField!]
+  acceptedOn: [GroupByField!]
+  createdAt: [GroupByField!]
+  createdBy: UserGroupByQuery
+  email: [GroupByField!]
+  firstName: [GroupByField!]
+  id: [GroupByField!]
+  invitedBy: TeamMemberGroupByQuery
+  invitee: TeamMemberGroupByQuery
+  lastName: [GroupByField!]
+  resentOn: [GroupByField!]
+  updatedAt: [GroupByField!]
+  uuid: [GroupByField!]
+}
+
+input TeamInvitationKeyFilter {
+  id: ID
+  uuid: String
+}
+
+input TeamInvitationRelationFilter {
+  every: TeamInvitationFilter
+  none: TeamInvitationFilter
+  some: TeamInvitationFilter
+}
+
+"Resend team invitation input"
+input TeamInvitationResendInput {
+  memberId: ID!
+}
+
+input TeamInvitationSort {
+  accepted: SortOrder
+  acceptedOn: SortOrder
+  createdAt: SortOrder
+  createdBy: UserSort
+  email: SortOrder
+  firstName: SortOrder
+  id: SortOrder
+  invitedBy: TeamMemberSort
+  invitee: TeamMemberSort
+  lastName: SortOrder
+  resentOn: SortOrder
+  updatedAt: SortOrder
+  uuid: SortOrder
+}
+
+"TeamInvitations subscription filter"
+input TeamInvitationSubscriptionFilter {
+  mutation_in: [MutationType]
+  node: TeamInvitationFilter
+  updatedFields: UpdatedFieldsFilter
+}
+
+"TeamMembers delete input"
+input TeamMemberDeleteInput {
+  force: Boolean
+  id: ID
+}
+
+input TeamMemberFilter {
+  AND: [TeamMemberFilter!]
+  OR: [TeamMemberFilter!]
+  _fullText: String
+  avatar: FileFilter
+  createdAt: DateTimePredicate
+  createdBy: UserFilter
+  id: IDPredicate
+  isOwner: BoolPredicate
+  is_self: Boolean
+  not_self: Boolean
+  receivedTeamInvitations: TeamInvitationRelationFilter
+  roles: RoleRelationFilter
+  sentTeamInvitations: TeamInvitationRelationFilter
+  status: StringPredicate
+  updatedAt: DateTimePredicate
+  user: UserFilter
+}
+
+input TeamMemberGroupBy {
+  first: Int
+  having: Having
+  last: Int
+  query: TeamMemberGroupByQuery!
+  skip: Int
+  sort: [GroupBySort!]
+}
+
+input TeamMemberGroupByQuery {
+  _group: [GroupIdentifiersGroupByField!]
+  avatar: FileGroupByQuery
+  createdAt: [GroupByField!]
+  createdBy: UserGroupByQuery
+  id: [GroupByField!]
+  isOwner: [GroupByField!]
+  receivedTeamInvitations: TeamInvitationGroupByQuery
+  roles: RoleGroupByQuery
+  sentTeamInvitations: TeamInvitationGroupByQuery
+  status: [GroupByField!]
+  updatedAt: [GroupByField!]
+  user: UserGroupByQuery
+}
+
+input TeamMemberKeyFilter {
+  id: ID
+}
+
+input TeamMemberRelationFilter {
+  every: TeamMemberFilter
+  none: TeamMemberFilter
+  some: TeamMemberFilter
+}
+
+input TeamMemberSort {
+  avatar: FileSort
+  createdAt: SortOrder
+  createdBy: UserSort
+  email: SortOrder
+  firstName: SortOrder
+  id: SortOrder
+  isOwner: SortOrder
+  lastName: SortOrder
+  status: SortOrder
+  updatedAt: SortOrder
+  user: UserSort
+}
+
+"TeamMembers subscription filter"
+input TeamMemberSubscriptionFilter {
+  mutation_in: [MutationType]
+  node: TeamMemberFilter
+  updatedFields: UpdatedFieldsFilter
+}
+
+"TeamMembers update input"
+input TeamMemberUpdateByFilterInput {
+  firstName: String
+  isOwner: [UpdateByFilterBooleanSwitchInput]
+  lastName: String
+  learningMode: Boolean
+  status: [UpdateByFilterStringSwitchInput]
+  timezone: String
+}
+
+"TeamMembers update input"
+input TeamMemberUpdateInput {
+  avatar: TeamMembersAvatarUpdateRelationInput
+  firstName: String
+  id: ID
+  lastName: String
+  learningMode: Boolean
+  receivedTeamInvitations: TeamMembersReceivedTeamInvitationsUpdateRelationInput
+  roles: TeamMembersRolesUpdateRelationInput
+  sentTeamInvitations: TeamMembersSentTeamInvitationsUpdateRelationInput
+  timezone: String
+}
+
+"TeamMembers relation input"
+input TeamMembersAvatarUpdateRelationInput {
+  connect: FileKeyFilter
+  create: TeamMembers_avatar_FileCreateInput
+  disconnect: FileKeyFilter
+  reconnect: FileKeyFilter
+  update: TeamMembers_avatar_FileUpdateInput
+}
+
+"TeamMembers relation input"
+input TeamMembersReceivedTeamInvitationsUpdateRelationInput {
+  connect: [TeamInvitationKeyFilter!]
+  disconnect: [TeamInvitationKeyFilter!]
+  reconnect: [TeamInvitationKeyFilter!]
+}
+
+"TeamMembers relation input"
+input TeamMembersRolesUpdateRelationInput {
+  connect: [RoleKeyFilter!]
+  create: [TeamMembers_RoleCreateInput]
+  disconnect: [RoleKeyFilter!]
+  reconnect: [RoleKeyFilter!]
+  update: [TeamMembers_RoleUpdateInput]
+}
+
+"TeamMembers relation input"
+input TeamMembersSentTeamInvitationsUpdateRelationInput {
+  connect: [TeamInvitationKeyFilter!]
+  disconnect: [TeamInvitationKeyFilter!]
+  reconnect: [TeamInvitationKeyFilter!]
+}
+
+"Roles create input from teamMembers"
+input TeamMembers_RoleCreateInput {
+  apiTokens: RolesApiTokensRelationInput
+  authenticationProfiles: RolesAuthenticationProfilesRelationInput
+  description: String
+  name: String!
+  permissions: PermissionsInput
+  teamMembers: RolesTeamMembersRelationInput
+  users: RolesUsersRelationInput
+}
+
+"Roles update input from teamMembers"
+input TeamMembers_RoleUpdateInput {
+  data: RoleUpdateInput!
+  filter: RoleKeyFilter
+}
+
+"Files create input from teamMembers_avatar"
+input TeamMembers_avatar_FileCreateInput {
+  fileId: String
+  filename: String
+  meta: JSON
+  mods: JSON
+  products_picture: FilesProducts_pictureRelationInput
+  public: Boolean = false
+  teamMembers_avatar: FilesTeamMembers_avatarRelationInput
+  users_avatar: FilesUsers_avatarRelationInput
+}
+
+"Files update input from teamMembers_avatar"
+input TeamMembers_avatar_FileUpdateInput {
+  fileId: String
+  filename: String
+  meta: JSON
+  mods: JSON
+  products_picture: FilesProducts_pictureUpdateRelationInput
+  public: Boolean
+  teamMembers_avatar: FilesTeamMembers_avatarUpdateRelationInput
+  users_avatar: FilesUsers_avatarUpdateRelationInput
+}
+
+input TrimFunctionArguments {
+  mode: StringTrimMode
+  str: String!
+}
+
+input UpdateByFilterBooleanSwitchInput {
+  invert: Boolean
+  set: Boolean
+}
+
+input UpdateByFilterDateInput {
+  add: UpdateByFilterDatePartsInput
+  set: String
+  sub: UpdateByFilterDatePartsInput
+}
+
+input UpdateByFilterDatePartsInput {
+  days: Int
+  months: Int
+  years: Int
+}
+
+input UpdateByFilterDateTimeInput {
+  add: UpdateByFilterDateTimePartsInput
+  set: String
+  sub: UpdateByFilterDateTimePartsInput
+}
+
+input UpdateByFilterDateTimePartsInput {
+  days: Int
+  hours: Int
+  microseconds: Int
+  minutes: Int
+  months: Int
+  seconds: Int
+  years: Int
+}
+
+input UpdateByFilterIntInput {
+  add: Int
+  dev: Int
+  mod: Int
+  mult: Int
+  pow: Int
+  prec: Int
+  set: Int
+  sqrt: Boolean
+  sub: Int
+}
+
+input UpdateByFilterJsonInput {
+  set: JSON
+}
+
+input UpdateByFilterListStringInput {
+  set: [String]
+}
+
+input UpdateByFilterStringInput {
+  postfix: String
+  prefix: String
+  set: String
+}
+
+input UpdateByFilterStringSwitchInput {
+  set: String
+}
+
+"UpdatedFieldsFilter"
+input UpdatedFieldsFilter {
+  contains: [String]
+  every: [String]
+}
+
+"Users create input"
+input UserCreateInput {
+  avatar: UsersAvatarRelationInput
+  email: String!
+  firstName: String
+  lastName: String
+  roles: UsersRolesRelationInput
+  status: String = "inactive"
+  timezone: String
+}
+
+"Users create many input"
+input UserCreateManyInput {
+  email: String!
+  firstName: String
+  lastName: String
+  status: String = "inactive"
+  timezone: String
+}
+
+"Users delete input"
+input UserDeleteInput {
+  force: Boolean
+  id: ID
+}
+
+"UserFieldsPermissions create input"
+input UserFieldsPermissions {
+  createdAt: Boolean
+  email: Boolean
+  firstName: Boolean
+  is8base: Boolean
+  lastName: Boolean
+  origin: Boolean
+  status: Boolean
+  timezone: Boolean
+  updatedAt: Boolean
+}
+
+input UserFilter {
+  AND: [UserFilter!]
+  OR: [UserFilter!]
+  _fullText: String
+  avatar: FileFilter
+  createdAt: DateTimePredicate
+  createdBy: UserFilter
+  email: StringPredicate
+  firstName: StringPredicate
+  id: IDPredicate
+  is8base: BoolPredicate
+  is_self: Boolean
+  lastName: StringPredicate
+  not_self: Boolean
+  origin: StringPredicate
+  roles: RoleRelationFilter
+  status: StringPredicate
+  timezone: StringPredicate
+  updatedAt: DateTimePredicate
+}
+
+input UserGroupBy {
+  first: Int
+  having: Having
+  last: Int
+  query: UserGroupByQuery!
+  skip: Int
+  sort: [GroupBySort!]
+}
+
+input UserGroupByQuery {
+  _group: [GroupIdentifiersGroupByField!]
+  avatar: FileGroupByQuery
+  createdAt: [GroupByField!]
+  createdBy: UserGroupByQuery
+  email: [GroupByField!]
+  firstName: [GroupByField!]
+  id: [GroupByField!]
+  is8base: [GroupByField!]
+  lastName: [GroupByField!]
+  origin: [GroupByField!]
+  roles: RoleGroupByQuery
+  status: [GroupByField!]
+  timezone: [GroupByField!]
+  updatedAt: [GroupByField!]
+}
+
+input UserKeyFilter {
+  email: String
+  id: ID
+}
+
+"UserLoginInput"
+input UserLoginInput {
+  authProfileId: ID
+  email: String!
+  fromInvitation: String
+  password: String!
+}
+
+input UserRelationFilter {
+  every: UserFilter
+  none: UserFilter
+  some: UserFilter
+}
+
+input UserSort {
+  avatar: FileSort
+  createdAt: SortOrder
+  createdBy: UserSort
+  email: SortOrder
+  firstName: SortOrder
+  id: SortOrder
+  is8base: SortOrder
+  lastName: SortOrder
+  origin: SortOrder
+  status: SortOrder
+  timezone: SortOrder
+  updatedAt: SortOrder
+}
+
+"Users subscription filter"
+input UserSubscriptionFilter {
+  mutation_in: [MutationType]
+  node: UserFilter
+  updatedFields: UpdatedFieldsFilter
+}
+
+"Users update input"
+input UserUpdateByFilterInput {
+  email: [UpdateByFilterStringInput]
+  firstName: [UpdateByFilterStringInput]
+  is8base: [UpdateByFilterBooleanSwitchInput]
+  isOwner: [UpdateByFilterBooleanSwitchInput]
+  lastName: [UpdateByFilterStringInput]
+  origin: [UpdateByFilterStringSwitchInput]
+  status: [UpdateByFilterStringSwitchInput]
+  timezone: [UpdateByFilterStringInput]
+}
+
+"Users update input"
+input UserUpdateInput {
+  avatar: UsersAvatarUpdateRelationInput
+  email: String
+  firstName: String
+  id: ID
+  lastName: String
+  roles: UsersRolesUpdateRelationInput
+  status: String
+  timezone: String
+}
+
+"Users relation input"
+input UsersAvatarRelationInput {
+  connect: FileKeyFilter
+  create: Users_avatar_FileCreateInput
+}
+
+"Users relation input"
+input UsersAvatarUpdateRelationInput {
+  connect: FileKeyFilter
+  create: Users_avatar_FileCreateInput
+  disconnect: FileKeyFilter
+  reconnect: FileKeyFilter
+  update: Users_avatar_FileUpdateInput
+}
+
+"Users relation input"
+input UsersRolesRelationInput {
+  connect: [RoleKeyFilter!]
+  create: [Users_RoleCreateInput]
+}
+
+"Users relation input"
+input UsersRolesUpdateRelationInput {
+  connect: [RoleKeyFilter!]
+  create: [Users_RoleCreateInput]
+  disconnect: [RoleKeyFilter!]
+  reconnect: [RoleKeyFilter!]
+  update: [Users_RoleUpdateInput]
+}
+
+"Roles create input from users"
+input Users_RoleCreateInput {
+  apiTokens: RolesApiTokensRelationInput
+  authenticationProfiles: RolesAuthenticationProfilesRelationInput
+  description: String
+  name: String!
+  permissions: PermissionsInput
+  teamMembers: RolesTeamMembersRelationInput
+  users: RolesUsersRelationInput
+}
+
+"Roles update input from users"
+input Users_RoleUpdateInput {
+  data: RoleUpdateInput!
+  filter: RoleKeyFilter
+}
+
+"Files create input from users_avatar"
+input Users_avatar_FileCreateInput {
+  fileId: String
+  filename: String
+  meta: JSON
+  mods: JSON
+  products_picture: FilesProducts_pictureRelationInput
+  public: Boolean = false
+  teamMembers_avatar: FilesTeamMembers_avatarRelationInput
+  users_avatar: FilesUsers_avatarRelationInput
+}
+
+"Files update input from users_avatar"
+input Users_avatar_FileUpdateInput {
+  fileId: String
+  filename: String
+  meta: JSON
+  mods: JSON
+  products_picture: FilesProducts_pictureUpdateRelationInput
+  public: Boolean
+  teamMembers_avatar: FilesTeamMembers_avatarUpdateRelationInput
+  users_avatar: FilesUsers_avatarUpdateRelationInput
+}
+
+"VerificationEmailResendInput"
+input VerificationEmailResendInput {
+  email: String!
+}
+
+"View Create Input"
+input ViewCreateInput {
+  description: String
+  displayName: String
+  name: String!
+  query: String!
+}
+
+"View Update Input"
+input ViewUpdateInput {
+  description: String
+  displayName: String
+  id: ID!
+  name: String
+  query: String
+}
+
+"WorkspaceCreateMutationInput"
+input WorkspaceCreateMutationInput {
+  billingPlanId: ID
+  name: String!
+}
+
+"WorkspaceDeleteMutationInput"
+input WorkspaceDeleteMutationInput {
+  id: ID!
+}
+
+"WorkspaceUpdateMutationInput"
+input WorkspaceUpdateMutationInput {
+  id: ID!
+  name: String
+}
+
+
+"A date-time string at UTC, such as `2007-12-25T16:15:30Z`, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar."
+scalar DateTime
+
+"The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf)."
+scalar JSON
+
+"A date string, such as `2007-12-25`, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar."
+scalar Date
+
+"The `BigInt` scalar type represents whole numeric values."
+scalar BigInt
+
+"A time string at UTC, such as `16:15:30Z`, compliant with the `full-time` format outlined in section 5.6 of the RFC 3339profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar."
+scalar Time

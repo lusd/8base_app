@@ -1,0 +1,1 @@
+export { OrderInfo } from './OrdersInfoPage';
