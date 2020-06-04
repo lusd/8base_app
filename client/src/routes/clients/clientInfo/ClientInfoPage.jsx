@@ -19,6 +19,7 @@ let ClientInfo = (props) => {
       return <Loader stretch/>;
     }
     const { client } = data;
+    if (!client) return  <>'Sorry, no data available, please <Link to="/clients">Go back</Link>.'</>;
     const {
       firstName,
       lastName,

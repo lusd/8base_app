@@ -26,11 +26,8 @@ class OrderCreateDialog extends React.Component {
 
   dataStorage = []; // Temporary storage for created "order items" at second inner Form element.
 
-  innerFormButton = React.createRef(); // Reference for button to call click action and submit form.
-  // (It is not the best way to submit form in long run, but I just needed working solution).
-
   onSubmit = async (data) => {
-    this.innerFormButton.current.click(); // Calling click() action at button submit second Inner Form and fill dataStorage
+    document.getElementById('innerFormButton').click(); // Calling click() action at button submit second Inner Form and fill dataStorage
     const dataWithOrderItems = { ...data, orderItems: this.dataStorage[0] };
     await this.props.orderCreate({ variables: { data: dataWithOrderItems }});
     this.dataStorage = []; //clearing temporary storage;

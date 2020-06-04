@@ -6,7 +6,7 @@ import { Query } from "react-apollo";
 import * as sharedGraphQL from 'shared/graphql';
 import {productsOptions} from 'shared/components';
 
-const OrderItemCreateForm = ({ handleSubmit, form: { mutators: { push }} }) => (
+const OrderItemCreateForm = ({ handleSubmit, form: { mutators: { push } } }) => (
   <form
     onSubmit={ handleSubmit }
   >
@@ -65,13 +65,13 @@ const OrderItemCreateForm = ({ handleSubmit, form: { mutators: { push }} }) => (
         )
       }
     </FieldArray>
-    <button style={{
+    <button id="innerFormButton" style={{
       opacity: '0',
       visibility: 'hidden',
       position: 'absolute',
       zIndex: '-9999',
       left: '-9999'
-    }} type="submit" ref={this.innerFormButton}>
+    }} type="submit">
     </button>
   </form>
 );

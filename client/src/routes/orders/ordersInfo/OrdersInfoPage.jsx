@@ -21,6 +21,8 @@ let OrderInfo = (props) => {
       return <Loader stretch/>;
     }
     const { order } = data;
+    if (!order) return <>'Sorry, no data available, please <Link to="/Orders">Go back</Link>.'</>;
+
     const {
       address,
       comment,
@@ -32,6 +34,7 @@ let OrderInfo = (props) => {
       client,
       orderItems,
     } = order;
+    
     return (
       <Card stretch>
         <Card.Header>
